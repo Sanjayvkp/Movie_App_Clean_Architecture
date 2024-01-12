@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_application/core/constants/login/login_constants.dart';
+import 'package:movie_application/core/constants/authentication/login_constants.dart';
+
 import 'package:movie_application/core/theme/app_theme.dart';
+import 'package:movie_application/features/movie_feature1/presentation/pages/signup_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/login_container_widget.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/login_txtbtn.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/loginbtn_widget.dart';
@@ -15,18 +17,18 @@ class LoginPage extends ConsumerWidget {
     final data = ref.watch(loginConstantsProvider);
     final theme = AppTheme.of(context);
     return Scaffold(
+      backgroundColor: theme.colors.secondary,
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const LoginContainerWidget(image: 'assets/images/logo_2.png'),
-              Text(
-                data.welcometxt,
-                style: theme.typography.h700,
+              LoginContainerWidget(
+                image: 'assets/images/movie_logo3.png',
+                height: theme.spaces.space_800 * 3,
               ),
               SizedBox(
-                height: theme.spaces.space_500,
+                height: theme.spaces.space_800,
               ),
               TextfieldWidget(
                 labeltext: data.emailtxt,
@@ -50,10 +52,13 @@ class LoginPage extends ConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    LogintxtButtonWidget(
-                        txtbtntext: ref
-                            .watch(loginConstantsProvider)
-                            .forgotpasswordtxt),
+                    TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          data.forgotpasswordtxt,
+                          style: theme.typography.h400
+                              .copyWith(color: theme.colors.primary),
+                        ))
                   ],
                 ),
               ),
@@ -62,19 +67,49 @@ class LoginPage extends ConsumerWidget {
               ),
               LoginButtonWidget(
                 btntxt: data.loginbtntxt,
+                onPressed: () {},
               ),
               SizedBox(
                 height: theme.spaces.space_500,
               ),
-              Text(ref.watch(loginConstantsProvider).alternativetxt),
+              Text(
+                ref.watch(loginConstantsProvider).alternativetxt,
+                style: theme.typography.h400
+                    .copyWith(color: theme.colors.textSubtlest),
+              ),
               SizedBox(
                 height: theme.spaces.space_200,
               ),
               InkWell(
                 onTap: () {},
-                child: const LoginContainerWidget(
-                    image: 'assets/images/login_google.png'),
+                child: LoginContainerWidget(
+                  image: 'assets/images/login_google.png',
+                  height: theme.spaces.space_700,
+                ),
               ),
+              SizedBox(
+                height: theme.spaces.space_700,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    data.registertxt,
+                    style: theme.typography.h400
+                        .copyWith(color: theme.colors.textSubtlest),
+                  ),
+                  LogintxtButtonWidget(
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return SignupPage();
+                          },
+                        ));
+                      },
+                      txtbtntext:
+                          ref.watch(loginConstantsProvider).registerbtntxt)
+                ],
+              )
             ],
           ),
         ),

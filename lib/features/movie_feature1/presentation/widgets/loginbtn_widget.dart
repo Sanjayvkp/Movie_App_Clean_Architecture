@@ -4,7 +4,8 @@ import 'package:movie_application/core/theme/app_theme.dart';
 
 class LoginButtonWidget extends ConsumerWidget {
   final String btntxt;
-  const LoginButtonWidget({super.key, required this.btntxt});
+  final void Function()? onPressed;
+   const LoginButtonWidget({super.key, required this.btntxt,required this.onPressed});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -12,8 +13,8 @@ class LoginButtonWidget extends ConsumerWidget {
         style: ElevatedButton.styleFrom(
             minimumSize: Size(MediaQuery.sizeOf(context).width / 1.1,
                 MediaQuery.sizeOf(context).height / 13),
-            backgroundColor: AppTheme.of(context).colors.secondary),
-        onPressed: () {},
+            backgroundColor: AppTheme.of(context).colors.textSubtle),
+        onPressed: onPressed,
         child: Text(
           btntxt,
           style: TextStyle(

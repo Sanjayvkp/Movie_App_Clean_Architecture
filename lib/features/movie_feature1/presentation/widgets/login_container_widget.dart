@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 class LoginContainerWidget extends StatelessWidget {
   final String image;
-  const LoginContainerWidget({super.key, required this.image});
+  final double height;
+  const LoginContainerWidget(
+      {super.key, required this.image, required this.height});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: height,
       width: 80,
       decoration: BoxDecoration(
-          // color: Colors.amber,
           image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover)),
     );
   }

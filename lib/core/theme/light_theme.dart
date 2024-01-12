@@ -14,7 +14,7 @@ final _lightTheme = ThemeData(
       primary: const Color.fromARGB(255, 255, 255, 255),
       secondary: const Color.fromARGB(255, 0, 0, 0),
       text: AppColorPalette.grey900,
-      textInverse: Colors.white,
+      textInverse: const Color.fromARGB(255, 195, 195, 195),
       textSubtle: AppColorPalette.grey700,
       textSubtlest: AppColorPalette.grey500,
       backgroundDanger: Colors.red,
