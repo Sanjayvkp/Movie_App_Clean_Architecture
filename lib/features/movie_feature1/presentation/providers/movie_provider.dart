@@ -10,6 +10,7 @@ import 'package:movie_application/features/movie_feature1/domain/repository/auth
 import 'package:movie_application/features/movie_feature1/domain/usecases/logout_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/signin_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/signup_usecase.dart';
+import 'package:movie_application/features/movie_feature1/domain/usecases/verify_email_usecase.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/home_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/login_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -33,9 +34,18 @@ class Movie extends _$Movie {
   Future<void> signUpwithEmail(String email, String password) async {
     try {
       await SignUpUseCase(repository: repository)(email, password);
+      await verifyEmail();
       Future.sync(() => context.go(HomePage.routePath));
     } on SignUpException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
+    } on BaseException catch (e) {
+      Future.sync(() => SnackbarUtils.showMessage(context, e.message));
+    }
+  }
+
+  Future<void> verifyEmail() async {
+    try {
+      await EmailVerificationUsecase(repository: repository)();
     } on BaseException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
     }

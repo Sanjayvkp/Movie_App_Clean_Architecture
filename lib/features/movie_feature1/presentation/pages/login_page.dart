@@ -1,11 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_application/core/constants/authentication/login_constants.dart';
-
 import 'package:movie_application/core/theme/app_theme.dart';
-import 'package:movie_application/features/movie_feature1/presentation/pages/home_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/signup_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/providers/movie_provider.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/login_container_widget.dart';

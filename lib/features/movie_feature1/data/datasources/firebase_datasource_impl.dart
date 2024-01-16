@@ -39,6 +39,12 @@ class FirebaseAuthimpl implements FirebaseAuthentication {
         throw SigninException('cannot login', 'user is disabled');
       }
     }
+  
+  }
+
+  @override
+  Future<void> verifyEmail() async {
+    await _auth.currentUser?.sendEmailVerification();
   }
 
   @override

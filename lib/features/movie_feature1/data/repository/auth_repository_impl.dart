@@ -12,7 +12,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
 
   @override
   Future<void> signInwithEmail(String email, String password) {
-     return dataSource.signinEmail(email, password);
+    return dataSource.signinEmail(email, password);
   }
 
   @override
@@ -23,6 +23,11 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
   Future<void> signOut() {
     return dataSource.signout();
+  }
+
+  @override
+  Future<void> verifyEmail() async {
+    await dataSource.verifyEmail();
   }
 }
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
-import 'package:movie_application/features/movie_feature1/presentation/pages/signup_page.dart';
 
 class LogintxtButtonWidget extends ConsumerWidget {
   final String txtbtntext;

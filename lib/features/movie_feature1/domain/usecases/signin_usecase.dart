@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:movie_application/core/exception/authentication/invalid_credential_exception.dart';
 import 'package:movie_application/core/exception/authentication/signin_exception.dart';
-import 'package:movie_application/core/exception/authentication/signup_exception.dart';
 import 'package:movie_application/features/movie_feature1/domain/repository/auth_repository.dart';
 
 final class SignInUseCase {

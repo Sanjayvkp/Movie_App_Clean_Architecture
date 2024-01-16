@@ -8,4 +8,5 @@ abstract class FirebaseAuthentication {
     String password,
   );
   Future<void> signout();
+  Future<void> verifyEmail();
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:movie_application/features/movie_feature1/presentation/pages/login_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/providers/movie_provider.dart';
 
 class HomePage extends ConsumerWidget {
