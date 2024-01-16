@@ -11,6 +11,8 @@ final class LoginConstants {
   final alternativetxt = 'or continue with';
   final registertxt = 'Don"t have an account?';
   final registerbtntxt = 'Sign up';
+  final movielogo = 'assets/images/movie_logo3.png';
+  final googlelogo = 'assets/images/login_google.png';
 }
 
 @riverpod

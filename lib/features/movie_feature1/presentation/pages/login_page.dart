@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_application/core/constants/authentication/login_constants.dart';
 
 import 'package:movie_application/core/theme/app_theme.dart';
+import 'package:movie_application/features/movie_feature1/presentation/pages/home_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/signup_page.dart';
+import 'package:movie_application/features/movie_feature1/presentation/providers/movie_provider.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/login_container_widget.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/login_txtbtn.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/loginbtn_widget.dart';
@@ -11,10 +15,14 @@ import 'package:movie_application/features/movie_feature1/presentation/widgets/t
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
-
+  static const routePath = '/login';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(loginConstantsProvider);
+    final maindata = ref.read(movieProvider(context).notifier);
+    final emails = ref.read(movieProvider(context).notifier).emailcontroller;
+    final password =
+        ref.read(movieProvider(context).notifier).passwordcontroller;
     final theme = AppTheme.of(context);
     return Scaffold(
       backgroundColor: theme.colors.secondary,
@@ -24,13 +32,15 @@ class LoginPage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               LoginContainerWidget(
-                image: 'assets/images/movie_logo3.png',
+                image: data.movielogo,
                 height: theme.spaces.space_800 * 3,
+                width: theme.spaces.space_800 * 2,
               ),
               SizedBox(
                 height: theme.spaces.space_800,
               ),
               TextfieldWidget(
+                controller: maindata.emailcontroller,
                 labeltext: data.emailtxt,
                 icondata: Icon(
                   Icons.email_outlined,
@@ -41,6 +51,7 @@ class LoginPage extends ConsumerWidget {
                 height: theme.spaces.space_200,
               ),
               TextfieldWidget(
+                controller: maindata.passwordcontroller,
                 labeltext: data.passwordtxt,
                 icondata: Icon(
                   Icons.remove_red_eye_outlined,
@@ -67,7 +78,9 @@ class LoginPage extends ConsumerWidget {
               ),
               LoginButtonWidget(
                 btntxt: data.loginbtntxt,
-                onPressed: () {},
+                onPressed: () {
+                  maindata.signInWithEmail(emails.text, password.text);
+                },
               ),
               SizedBox(
                 height: theme.spaces.space_500,
@@ -83,7 +96,8 @@ class LoginPage extends ConsumerWidget {
               InkWell(
                 onTap: () {},
                 child: LoginContainerWidget(
-                  image: 'assets/images/login_google.png',
+                  width: theme.spaces.space_800,
+                  image: data.googlelogo,
                   height: theme.spaces.space_700,
                 ),
               ),
@@ -100,11 +114,7 @@ class LoginPage extends ConsumerWidget {
                   ),
                   LogintxtButtonWidget(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) {
-                            return SignupPage();
-                          },
-                        ));
+                        context.go(SignupPage.routePath);
                       },
                       txtbtntext:
                           ref.watch(loginConstantsProvider).registerbtntxt)

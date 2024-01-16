@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
 
-class TextfieldWidget extends StatelessWidget {
+class TextfieldWidget extends ConsumerWidget {
   final String labeltext;
   final Icon icondata;
+  final TextEditingController controller;
   const TextfieldWidget(
-      {super.key, required this.labeltext, required this.icondata});
+      {super.key, required this.labeltext, required this.icondata,required this.controller});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+  
     return SizedBox(
       width: MediaQuery.sizeOf(context).width / 1.1,
       child: TextField(
         autofocus: false,
+        controller: controller,
         cursorColor: AppTheme.of(context).colors.secondary,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(

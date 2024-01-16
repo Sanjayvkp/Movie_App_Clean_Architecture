@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "365823477901",
+    "project_id": "movie-app-ff280",
+    "storage_bucket": "movie-app-ff280.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365823477901:android:5534dd8b121a9a4a27fac4",
+        "android_client_info": {
+          "package_name": "com.example.movie_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365823477901-bjp6uihc9js52reh81b2u320dt94oahg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAI1Ww8DPYEwcrspoCFU9OAg9ZgZcpS7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365823477901-bjp6uihc9js52reh81b2u320dt94oahg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

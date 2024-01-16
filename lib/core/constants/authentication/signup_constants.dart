@@ -14,6 +14,7 @@ class SignupConstants {
   final alternativetxt = 'or continue with';
   final alreadyuser = 'Already have an account?';
   final loginnow = 'Login';
+  final movielogo = 'assets/images/movie_logo3.png';
 }
 
 @riverpod

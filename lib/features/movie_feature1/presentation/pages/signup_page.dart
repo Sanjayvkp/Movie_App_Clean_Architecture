@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_application/core/constants/authentication/login_constants.dart';
 import 'package:movie_application/core/constants/authentication/signup_constants.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
+import 'package:movie_application/features/movie_feature1/presentation/pages/home_page.dart';
+import 'package:movie_application/features/movie_feature1/presentation/pages/login_page.dart';
+import 'package:movie_application/features/movie_feature1/presentation/providers/movie_provider.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/login_container_widget.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/login_txtbtn.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/loginbtn_widget.dart';
@@ -10,10 +14,16 @@ import 'package:movie_application/features/movie_feature1/presentation/widgets/t
 
 class SignupPage extends ConsumerWidget {
   const SignupPage({super.key});
+  static const routePath = '/signup';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(signupConstantsProvider);
+    final maindata = ref.read(movieProvider(context).notifier);
+    final emails = ref.read(movieProvider(context).notifier).emailcontroller;
+    final password =
+        ref.read(movieProvider(context).notifier).passwordcontroller;
     final theme = AppTheme.of(context);
+
     return Scaffold(
       backgroundColor: theme.colors.secondary,
       body: Center(
@@ -22,7 +32,8 @@ class SignupPage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               LoginContainerWidget(
-                image: 'assets/images/movie_logo3.png',
+                width: theme.spaces.space_800 * 2,
+                image: data.movielogo,
                 height: theme.spaces.space_800 * 3,
               ),
               Text(
@@ -34,6 +45,7 @@ class SignupPage extends ConsumerWidget {
                 height: theme.spaces.space_300,
               ),
               TextfieldWidget(
+                controller: maindata.namecontroller,
                 labeltext: data.user,
                 icondata: Icon(
                   Icons.person_3_outlined,
@@ -44,6 +56,7 @@ class SignupPage extends ConsumerWidget {
                 height: theme.spaces.space_200,
               ),
               TextfieldWidget(
+                controller: maindata.numbercontroller,
                 labeltext: data.phonenumber,
                 icondata: Icon(
                   Icons.phone_android_rounded,
@@ -54,6 +67,7 @@ class SignupPage extends ConsumerWidget {
                 height: theme.spaces.space_200,
               ),
               TextfieldWidget(
+                controller: maindata.emailcontroller,
                 labeltext: data.emailtxt,
                 icondata: Icon(
                   Icons.email_outlined,
@@ -64,6 +78,7 @@ class SignupPage extends ConsumerWidget {
                 height: theme.spaces.space_200,
               ),
               TextfieldWidget(
+                controller: maindata.passwordcontroller,
                 labeltext: data.passwordtxt,
                 icondata: Icon(
                   Icons.remove_red_eye_outlined,
@@ -72,13 +87,6 @@ class SignupPage extends ConsumerWidget {
               ),
               SizedBox(
                 height: theme.spaces.space_200,
-              ),
-              TextfieldWidget(
-                labeltext: data.confirmpassword,
-                icondata: Icon(
-                  Icons.remove_red_eye_outlined,
-                  color: theme.colors.secondary,
-                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -98,7 +106,9 @@ class SignupPage extends ConsumerWidget {
               ),
               LoginButtonWidget(
                 btntxt: data.signupbtntxt,
-                onPressed: () {},
+                onPressed: () {
+                  maindata.signUpwithEmail(emails.text, password.text);
+                },
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -111,7 +121,7 @@ class SignupPage extends ConsumerWidget {
                   LogintxtButtonWidget(
                     txtbtntext: data.loginnow,
                     onPressed: () {
-                      Navigator.pop(context);
+                      context.go(LoginPage.routePath);
                     },
                   ),
                 ],
