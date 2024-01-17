@@ -9,6 +9,7 @@ import 'package:movie_application/features/movie_feature1/data/repository/auth_r
 import 'package:movie_application/features/movie_feature1/domain/repository/auth_repository.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/google_signin_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/logout_usecase.dart';
+import 'package:movie_application/features/movie_feature1/domain/usecases/password_reset_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/signin_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/signup_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/verify_email_usecase.dart';
@@ -39,6 +40,14 @@ class Movie extends _$Movie {
       Future.sync(() => context.go(HomePage.routePath));
     } on SignUpException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
+    } on BaseException catch (e) {
+      Future.sync(() => SnackbarUtils.showMessage(context, e.message));
+    }
+  }
+
+  Future<void> passwordResetEmail(String email) async {
+    try {
+      await PasswordResetEmailUsecase(repository: repository)(email);
     } on BaseException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
     }

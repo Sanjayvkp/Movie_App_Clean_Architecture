@@ -61,7 +61,9 @@ class LoginPage extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          maindata.passwordResetEmail(emails.text);
+                        },
                         child: Text(
                           data.forgotpasswordtxt,
                           style: theme.typography.h400

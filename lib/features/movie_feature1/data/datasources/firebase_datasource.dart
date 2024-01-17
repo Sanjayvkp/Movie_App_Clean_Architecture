@@ -9,6 +9,6 @@ abstract class FirebaseAuthentication {
   );
   Future<void> signout();
   Future<void> verifyEmail();
-  Future<void>googleSignIn();
-  
+  Future<void> googleSignIn();
+  Future<void> passwordResetEmail(String email);
 }

@@ -68,6 +68,11 @@ class FirebaseAuthimpl implements FirebaseAuthentication {
     await _auth.signOut();
     await GoogleSignIn().signOut();
   }
+
+  @override
+  Future<void> passwordResetEmail(String email) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
 }
 
 @riverpod

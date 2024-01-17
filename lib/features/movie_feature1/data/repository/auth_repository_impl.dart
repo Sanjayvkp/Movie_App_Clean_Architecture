@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:movie_application/features/movie_feature1/data/datasources/firebase_datasource.dart';
 import 'package:movie_application/features/movie_feature1/data/datasources/firebase_datasource_impl.dart';
 import 'package:movie_application/features/movie_feature1/domain/repository/auth_repository.dart';
@@ -33,6 +32,11 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   @override
   Future<void> googleSignIn() async {
     await dataSource.googleSignIn();
+  }
+
+  @override
+  Future<void> passwordResetEmail(String email) async {
+    await dataSource.passwordResetEmail(email);
   }
 }
 

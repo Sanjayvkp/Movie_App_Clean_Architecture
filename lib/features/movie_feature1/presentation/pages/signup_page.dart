@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movie_application/core/constants/authentication/login_constants.dart';
 import 'package:movie_application/core/constants/authentication/signup_constants.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/login_page.dart';
@@ -10,7 +9,6 @@ import 'package:movie_application/features/movie_feature1/presentation/widgets/l
 import 'package:movie_application/features/movie_feature1/presentation/widgets/login_txtbtn.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/loginbtn_widget.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/textfield_widget.dart';
-
 
 class SignupPage extends ConsumerWidget {
   const SignupPage({super.key});
@@ -86,23 +84,7 @@ class SignupPage extends ConsumerWidget {
                 ),
               ),
               SizedBox(
-                height: theme.spaces.space_200,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    LogintxtButtonWidget(
-                      txtbtntext:
-                          ref.watch(loginConstantsProvider).forgotpasswordtxt,
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: theme.spaces.space_300,
+                height: theme.spaces.space_800,
               ),
               LoginButtonWidget(
                 btntxt: data.signupbtntxt,
