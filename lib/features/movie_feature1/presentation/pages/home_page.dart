@@ -20,7 +20,7 @@ class HomePage extends ConsumerWidget {
               ))
         ],
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'HOMEPAGE',
           style: TextStyle(fontSize: 30),

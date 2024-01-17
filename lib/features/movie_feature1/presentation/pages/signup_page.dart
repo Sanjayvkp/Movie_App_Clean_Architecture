@@ -11,6 +11,7 @@ import 'package:movie_application/features/movie_feature1/presentation/widgets/l
 import 'package:movie_application/features/movie_feature1/presentation/widgets/loginbtn_widget.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/textfield_widget.dart';
 
+
 class SignupPage extends ConsumerWidget {
   const SignupPage({super.key});
   static const routePath = '/signup';

@@ -7,6 +7,7 @@ import 'package:movie_application/core/exception/base_exception.dart';
 import 'package:movie_application/core/utils/snackbar_utils.dart';
 import 'package:movie_application/features/movie_feature1/data/repository/auth_repository_impl.dart';
 import 'package:movie_application/features/movie_feature1/domain/repository/auth_repository.dart';
+import 'package:movie_application/features/movie_feature1/domain/usecases/google_signin_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/logout_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/signin_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/signup_usecase.dart';
@@ -46,6 +47,15 @@ class Movie extends _$Movie {
   Future<void> verifyEmail() async {
     try {
       await EmailVerificationUsecase(repository: repository)();
+    } on BaseException catch (e) {
+      Future.sync(() => SnackbarUtils.showMessage(context, e.message));
+    }
+  }
+
+  Future<void> signinWithGoogle() async {
+    try {
+      await GoogleSignInUsecase(repository: repository)();
+      Future.sync(() => context.go(HomePage.routePath));
     } on BaseException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
     }

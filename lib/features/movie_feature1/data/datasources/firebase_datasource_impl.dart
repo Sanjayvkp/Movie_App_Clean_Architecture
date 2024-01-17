@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movie_application/core/exception/authentication/signin_exception.dart';
 import 'package:movie_application/core/exception/authentication/signup_exception.dart';
 import 'package:movie_application/features/movie_feature1/data/datasources/firebase_datasource.dart';
@@ -39,7 +40,6 @@ class FirebaseAuthimpl implements FirebaseAuthentication {
         throw SigninException('cannot login', 'user is disabled');
       }
     }
-  
   }
 
   @override
@@ -48,8 +48,25 @@ class FirebaseAuthimpl implements FirebaseAuthentication {
   }
 
   @override
+  Future<void> googleSignIn() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
+    } on Exception catch (e) {
+      throw SignUpException('Cannot login', 'try again');
+    }
+  }
+
+  @override
   Future<void> signout() async {
-    return _auth.signOut();
+    await _auth.signOut();
+    await GoogleSignIn().signOut();
   }
 }
 

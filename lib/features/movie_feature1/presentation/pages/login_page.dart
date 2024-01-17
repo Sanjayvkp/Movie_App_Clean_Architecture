@@ -91,7 +91,9 @@ class LoginPage extends ConsumerWidget {
                 height: theme.spaces.space_200,
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  maindata.signinWithGoogle();
+                },
                 child: LoginContainerWidget(
                   width: theme.spaces.space_800,
                   image: data.googlelogo,
