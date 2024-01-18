@@ -6,7 +6,9 @@ final class SnackbarUtils {
       return;
     }
 
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+    ));
   }
 }

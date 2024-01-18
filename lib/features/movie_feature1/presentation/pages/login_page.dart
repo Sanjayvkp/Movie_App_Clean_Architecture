@@ -3,8 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_application/core/constants/authentication/login_constants.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
+import 'package:movie_application/features/movie_feature1/presentation/pages/login_with_phone_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/signup_page.dart';
-import 'package:movie_application/features/movie_feature1/presentation/providers/movie_provider.dart';
+import 'package:movie_application/features/movie_feature1/presentation/providers/auth_provider.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/login_container_widget.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/login_txtbtn.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/loginbtn_widget.dart';
@@ -92,15 +93,33 @@ class LoginPage extends ConsumerWidget {
               SizedBox(
                 height: theme.spaces.space_200,
               ),
-              InkWell(
-                onTap: () {
-                  maindata.signinWithGoogle();
-                },
-                child: LoginContainerWidget(
-                  width: theme.spaces.space_800,
-                  image: data.googlelogo,
-                  height: theme.spaces.space_700,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      maindata.signinWithGoogle();
+                    },
+                    child: LoginContainerWidget(
+                      width: theme.spaces.space_800,
+                      image: data.googlelogo,
+                      height: theme.spaces.space_700,
+                    ),
+                  ),
+                  SizedBox(
+                    width: theme.spaces.space_500,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      context.push(LoginPageWithPhone.routePath);
+                    },
+                    child: LoginContainerWidget(
+                      width: theme.spaces.space_500,
+                      image: data.phonelogo,
+                      height: theme.spaces.space_50 * 11,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: theme.spaces.space_700,

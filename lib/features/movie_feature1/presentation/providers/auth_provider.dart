@@ -8,16 +8,19 @@ import 'package:movie_application/core/utils/snackbar_utils.dart';
 import 'package:movie_application/features/movie_feature1/data/repository/auth_repository_impl.dart';
 import 'package:movie_application/features/movie_feature1/domain/repository/auth_repository.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/google_signin_usecase.dart';
+import 'package:movie_application/features/movie_feature1/domain/usecases/login_with_phone_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/logout_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/password_reset_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/signin_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/signup_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/verify_email_usecase.dart';
+import 'package:movie_application/features/movie_feature1/domain/usecases/verify_otp_usecase.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/home_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/login_page.dart';
+import 'package:movie_application/features/movie_feature1/presentation/pages/otp_verified_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'movie_provider.g.dart';
+part 'auth_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class Movie extends _$Movie {
@@ -26,6 +29,9 @@ class Movie extends _$Movie {
   final TextEditingController namecontroller = TextEditingController();
   final TextEditingController numbercontroller = TextEditingController();
   final TextEditingController confirmcontroller = TextEditingController();
+  final TextEditingController phonenumberlogincontroller =
+      TextEditingController();
+  final TextEditingController otpcontroller = TextEditingController();
   late final AuthenticationRepository repository;
 
   @override
@@ -76,6 +82,24 @@ class Movie extends _$Movie {
       Future.sync(() => context.go(HomePage.routePath));
     } on SigninException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
+    } on BaseException catch (e) {
+      Future.sync(() => SnackbarUtils.showMessage(context, e.message));
+    }
+  }
+
+  Future<void> signInWithPhone(String phone) async {
+    try {
+      await LoginwithPhoneUsecase(repository: repository)(phone);
+      Future.sync(() => context.push(OtpVerificationPage.routePath));
+    } on BaseException catch (e) {
+      Future.sync(() => SnackbarUtils.showMessage(context, e.message));
+    }
+  }
+
+  Future<void> verifyOtp(String otp) async {
+    try {
+      await VerifyOtpUsecase(repository: repository)(otp);
+      Future.sync(() => context.push(HomePage.routePath));
     } on BaseException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
     }

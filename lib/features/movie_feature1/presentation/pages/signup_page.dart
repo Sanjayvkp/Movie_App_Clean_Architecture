@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:movie_application/core/constants/authentication/signup_constants.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/login_page.dart';
-import 'package:movie_application/features/movie_feature1/presentation/providers/movie_provider.dart';
+import 'package:movie_application/features/movie_feature1/presentation/providers/auth_provider.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/login_container_widget.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/login_txtbtn.dart';
 import 'package:movie_application/features/movie_feature1/presentation/widgets/loginbtn_widget.dart';

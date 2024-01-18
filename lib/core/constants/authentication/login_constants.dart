@@ -13,6 +13,11 @@ final class LoginConstants {
   final registerbtntxt = 'Sign up';
   final movielogo = 'assets/images/movie_logo3.png';
   final googlelogo = 'assets/images/login_google.png';
+  final phonelogo = 'assets/images/phone_logo.png';
+  final phonenumber = 'Phone number';
+  final otp = 'Send OTP';
+  final otpfield = 'Enter your OTP';
+  final otpconfirmbtn = 'Confirm';
 }
 
 @riverpod

@@ -38,6 +38,16 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Future<void> passwordResetEmail(String email) async {
     await dataSource.passwordResetEmail(email);
   }
+
+  @override
+  Future<void> loginWithPhone(String phone) async {
+    await dataSource.loginWithPhone(phone);
+  }
+
+  @override
+  Future<void> verifyOtp(String otp) async {
+    await dataSource.verifyOtp(otp);
+  }
 }
 
 @riverpod

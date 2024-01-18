@@ -69,6 +69,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '365823477901',
     projectId: 'movie-app-ff280',
     storageBucket: 'movie-app-ff280.appspot.com',
+    androidClientId: '365823477901-o9fhisgg74ct3thp652vn3jdvqklk5ru.apps.googleusercontent.com',
     iosClientId: '365823477901-mtvmbql3aodpbg8ohtcatbs6mb2dsql3.apps.googleusercontent.com',
     iosBundleId: 'com.example.movieApplication',
   );

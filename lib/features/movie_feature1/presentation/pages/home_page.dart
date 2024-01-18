@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_application/features/movie_feature1/presentation/providers/movie_provider.dart';
+import 'package:movie_application/features/movie_feature1/presentation/providers/auth_provider.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
