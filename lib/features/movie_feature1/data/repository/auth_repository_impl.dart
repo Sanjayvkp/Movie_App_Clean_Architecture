@@ -40,13 +40,13 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  Future<void> loginWithPhone(String phone) async {
-    await dataSource.loginWithPhone(phone);
+  Future<(String, int?)> loginWithPhone(String phone) async {
+    return await dataSource.loginWithPhone(phone);
   }
 
   @override
-  Future<void> verifyOtp(String otp) async {
-    await dataSource.verifyOtp(otp);
+  Future<void> verifyOtp(String verificationId, String otp) async {
+    await dataSource.verifyOtp(verificationId, otp);
   }
 }
 

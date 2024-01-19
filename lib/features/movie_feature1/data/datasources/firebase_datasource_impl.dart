@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -11,9 +12,6 @@ part 'firebase_datasource_impl.g.dart';
 class FirebaseAuthimpl implements FirebaseAuthentication {
   final FirebaseAuth _auth;
   FirebaseAuthimpl(this._auth);
-
-  String? verificationId;
-  int? resendToken;
 
   @override
   Future<void> signupEmail(String email, String password) async {
@@ -79,8 +77,12 @@ class FirebaseAuthimpl implements FirebaseAuthentication {
   }
 
   @override
-  Future<void> loginWithPhone(String phone) async {
+  Future<(String, int?)> loginWithPhone(String phone,
+      [int? resendToken]) async {
     try {
+      final verificationIdCompleter = Completer<String>();
+      final resendTokenCompleter = Completer<int?>();
+
       await FirebaseAuth.instance.verifyPhoneNumber(
         forceResendingToken: resendToken,
         phoneNumber: phone,
@@ -88,25 +90,28 @@ class FirebaseAuthimpl implements FirebaseAuthentication {
           await _auth.signInWithCredential(credential);
         },
         verificationFailed: (FirebaseAuthException e) {
-          if (e.code == 'invalid-phone-number') {
-            log('The provided phone number is not valid.');
-          }
+          if (e.code == 'invalid-phone-number') {}
         },
-        codeSent: (String verificationId, int? resendToken) async {
-          this.resendToken = resendToken;
-          this.verificationId = verificationId;
+        codeSent: (String? verificationId, int? resendToken) async {
+          verificationIdCompleter.complete(verificationId);
+          resendTokenCompleter.complete(resendToken);
         },
         codeAutoRetrievalTimeout: (String verificationId) async {},
       );
+
+      final verificationId = await verificationIdCompleter.future;
+      final newResendToken = await resendTokenCompleter.future;
+
+      return (verificationId, newResendToken);
     } on Exception {
       throw SigninException('cannot login', 'please try again');
     }
   }
 
   @override
-  Future<void> verifyOtp(String otp) async {
+  Future<void> verifyOtp(String verificationId, String otp) async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationId!, smsCode: otp);
+        verificationId: verificationId, smsCode: otp);
     await _auth.signInWithCredential(credential);
   }
 }

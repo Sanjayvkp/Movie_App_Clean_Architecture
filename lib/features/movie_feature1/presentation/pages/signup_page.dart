@@ -16,10 +16,9 @@ class SignupPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(signupConstantsProvider);
-    final maindata = ref.read(movieProvider(context).notifier);
-    final emails = ref.read(movieProvider(context).notifier).emailcontroller;
-    final password =
-        ref.read(movieProvider(context).notifier).passwordcontroller;
+    final maindata = ref.read(movieProvider.notifier);
+    final emails = ref.read(movieProvider.notifier).emailcontroller;
+    final password = ref.read(movieProvider.notifier).passwordcontroller;
     final theme = AppTheme.of(context);
 
     return Scaffold(
@@ -89,7 +88,7 @@ class SignupPage extends ConsumerWidget {
               LoginButtonWidget(
                 btntxt: data.signupbtntxt,
                 onPressed: () {
-                  maindata.signUpwithEmail(emails.text, password.text);
+                  maindata.signUpwithEmail(context, emails.text, password.text);
                 },
               ),
               Row(

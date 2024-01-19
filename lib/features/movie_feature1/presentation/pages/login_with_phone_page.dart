@@ -16,7 +16,7 @@ class LoginPageWithPhone extends ConsumerWidget {
   static const routePath = '/loginwithphone';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final maindata = ref.read(movieProvider(context).notifier);
+    final maindata = ref.read(movieProvider.notifier);
     final theme = AppTheme.of(context);
     final data = ref.watch(loginConstantsProvider);
     final signuptexts = ref.watch(signupConstantsProvider);
@@ -48,6 +48,7 @@ class LoginPageWithPhone extends ConsumerWidget {
                 btntxt: data.otp,
                 onPressed: () {
                   maindata.signInWithPhone(
+                    context,
                     maindata.phonenumberlogincontroller.text,
                   );
                 },

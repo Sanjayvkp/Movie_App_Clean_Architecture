@@ -12,7 +12,7 @@ class OtpVerificationPage extends ConsumerWidget {
   static const routePath = '/loginwithotp';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final maindata = ref.read(movieProvider(context).notifier);
+    final maindata = ref.read(movieProvider.notifier);
     final theme = AppTheme.of(context);
     final data = ref.watch(loginConstantsProvider);
 
@@ -40,7 +40,10 @@ class OtpVerificationPage extends ConsumerWidget {
               LoginButtonWidget(
                 btntxt: data.otpconfirmbtn,
                 onPressed: () {
-                  maindata.verifyOtp(maindata.otpcontroller.text);
+                  maindata.verifyOtp(
+                    context,
+                    maindata.otpcontroller.text,
+                  );
                 },
               ),
               SizedBox(

@@ -14,7 +14,7 @@ final router = GoRouter(initialLocation: HomePage.routePath, routes: [
     },
     redirect: (context, state) {
       final user = FirebaseAuth.instance.currentUser;
-      if (user == null || !user.emailVerified ) {
+      if (user == null || (!user.emailVerified && user.phoneNumber == null)) {
         return LoginPage.routePath;
       }
       return null;

@@ -12,7 +12,7 @@ class HomePage extends ConsumerWidget {
         actions: [
           IconButton(
               onPressed: () {
-                ref.read(movieProvider(context).notifier).signOut();
+                ref.read(movieProvider.notifier).signOut(context);
               },
               icon: const Icon(
                 Icons.logout,

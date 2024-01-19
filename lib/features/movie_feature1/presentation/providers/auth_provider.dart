@@ -18,6 +18,7 @@ import 'package:movie_application/features/movie_feature1/domain/usecases/verify
 import 'package:movie_application/features/movie_feature1/presentation/pages/home_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/login_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/otp_verified_page.dart';
+import 'package:movie_application/features/movie_feature1/presentation/providers/auth_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_provider.g.dart';
@@ -35,14 +36,16 @@ class Movie extends _$Movie {
   late final AuthenticationRepository repository;
 
   @override
-  void build(BuildContext context) {
+  AuthState build() {
     repository = ref.read(authenticationRepositoryProvider);
+    return AuthState(verificationId: '', resendToken: null);
   }
 
-  Future<void> signUpwithEmail(String email, String password) async {
+  Future<void> signUpwithEmail(
+      BuildContext context, String email, String password) async {
     try {
       await SignUpUseCase(repository: repository)(email, password);
-      await verifyEmail();
+      Future.sync(() => verifyEmail(context));
       Future.sync(() => context.go(HomePage.routePath));
     } on SignUpException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
@@ -51,7 +54,7 @@ class Movie extends _$Movie {
     }
   }
 
-  Future<void> passwordResetEmail(String email) async {
+  Future<void> passwordResetEmail(BuildContext context, String email) async {
     try {
       await PasswordResetEmailUsecase(repository: repository)(email);
     } on BaseException catch (e) {
@@ -59,7 +62,7 @@ class Movie extends _$Movie {
     }
   }
 
-  Future<void> verifyEmail() async {
+  Future<void> verifyEmail(BuildContext context) async {
     try {
       await EmailVerificationUsecase(repository: repository)();
     } on BaseException catch (e) {
@@ -67,7 +70,7 @@ class Movie extends _$Movie {
     }
   }
 
-  Future<void> signinWithGoogle() async {
+  Future<void> signinWithGoogle(BuildContext context) async {
     try {
       await GoogleSignInUsecase(repository: repository)();
       Future.sync(() => context.go(HomePage.routePath));
@@ -76,7 +79,8 @@ class Movie extends _$Movie {
     }
   }
 
-  Future<void> signInWithEmail(String email, String password) async {
+  Future<void> signInWithEmail(
+      BuildContext context, String email, String password) async {
     try {
       await SignInUseCase(repository: repository)(email, password);
       Future.sync(() => context.go(HomePage.routePath));
@@ -87,25 +91,29 @@ class Movie extends _$Movie {
     }
   }
 
-  Future<void> signInWithPhone(String phone) async {
+  Future<void> signInWithPhone(BuildContext context, String phone) async {
     try {
-      await LoginwithPhoneUsecase(repository: repository)(phone);
+      final verificationData =
+          await LoginwithPhoneUsecase(repository: repository)(phone);
+      state = AuthState(
+          verificationId: verificationData.$1,
+          resendToken: verificationData.$2);
       Future.sync(() => context.push(OtpVerificationPage.routePath));
     } on BaseException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
     }
   }
 
-  Future<void> verifyOtp(String otp) async {
+  Future<void> verifyOtp(BuildContext context, String otp) async {
     try {
-      await VerifyOtpUsecase(repository: repository)(otp);
+      await VerifyOtpUsecase(repository: repository)(state.verificationId, otp);
       Future.sync(() => context.push(HomePage.routePath));
     } on BaseException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
     }
   }
 
-  Future<void> signOut() async {
+  Future<void> signOut(BuildContext context) async {
     try {
       await SignOutUseCase(repository: repository)();
       Future.sync(() => context.go(LoginPage.routePath));

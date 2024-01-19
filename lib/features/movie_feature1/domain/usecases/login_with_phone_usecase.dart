@@ -4,11 +4,11 @@ import 'package:movie_application/features/movie_feature1/domain/repository/auth
 final class LoginwithPhoneUsecase {
   final AuthenticationRepository repository;
   LoginwithPhoneUsecase({required this.repository});
-  Future<void> call(String phone) async {
+  Future<(String, int?)> call(String phone) async {
     try {
-      await repository.loginWithPhone(phone);
+      return await repository.loginWithPhone(phone);
     } on Exception {
-      throw BaseException('Enter your Phone number correctly');
+      throw BaseException('Enter your phone number and otp correctly');
     }
   }
 }

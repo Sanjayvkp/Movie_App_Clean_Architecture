@@ -11,6 +11,6 @@ abstract class FirebaseAuthentication {
   Future<void> verifyEmail();
   Future<void> googleSignIn();
   Future<void> passwordResetEmail(String email);
-  Future<void> loginWithPhone(String phone);
-  Future<void> verifyOtp(String otp);
+  Future<(String, int?)> loginWithPhone(String phone);
+  Future<void> verifyOtp(String verificationId, String otp);
 }

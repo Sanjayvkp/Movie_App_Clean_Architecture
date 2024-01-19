@@ -17,10 +17,9 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(loginConstantsProvider);
-    final maindata = ref.read(movieProvider(context).notifier);
-    final emails = ref.read(movieProvider(context).notifier).emailcontroller;
-    final password =
-        ref.read(movieProvider(context).notifier).passwordcontroller;
+    final maindata = ref.read(movieProvider.notifier);
+    final emails = ref.read(movieProvider.notifier).emailcontroller;
+    final password = ref.read(movieProvider.notifier).passwordcontroller;
     final theme = AppTheme.of(context);
     return Scaffold(
       backgroundColor: theme.colors.secondary,
@@ -29,13 +28,16 @@ class LoginPage extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(
+                height: theme.spaces.space_800,
+              ),
               LoginContainerWidget(
                 image: data.movielogo,
                 height: theme.spaces.space_800 * 3,
                 width: theme.spaces.space_800 * 2,
               ),
               SizedBox(
-                height: theme.spaces.space_800,
+                height: theme.spaces.space_100,
               ),
               TextfieldWidget(
                 controller: maindata.emailcontroller,
@@ -63,7 +65,7 @@ class LoginPage extends ConsumerWidget {
                   children: [
                     TextButton(
                         onPressed: () {
-                          maindata.passwordResetEmail(emails.text);
+                          maindata.passwordResetEmail(context, emails.text);
                         },
                         child: Text(
                           data.forgotpasswordtxt,
@@ -79,7 +81,7 @@ class LoginPage extends ConsumerWidget {
               LoginButtonWidget(
                 btntxt: data.loginbtntxt,
                 onPressed: () {
-                  maindata.signInWithEmail(emails.text, password.text);
+                  maindata.signInWithEmail(context, emails.text, password.text);
                 },
               ),
               SizedBox(
@@ -91,14 +93,14 @@ class LoginPage extends ConsumerWidget {
                     .copyWith(color: theme.colors.textSubtlest),
               ),
               SizedBox(
-                height: theme.spaces.space_200,
+                height: theme.spaces.space_400,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
                     onTap: () {
-                      maindata.signinWithGoogle();
+                      maindata.signinWithGoogle(context);
                     },
                     child: LoginContainerWidget(
                       width: theme.spaces.space_800,
