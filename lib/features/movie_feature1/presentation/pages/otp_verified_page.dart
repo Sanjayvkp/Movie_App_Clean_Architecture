@@ -31,6 +31,7 @@ class OtpVerificationPage extends ConsumerWidget {
                 height: theme.spaces.space_300,
               ),
               TextfieldWidget(
+                  keyboardtype: TextInputType.number,
                   labeltext: data.otpfield,
                   icondata: const Icon(Icons.lock_clock_rounded),
                   controller: maindata.otpcontroller),

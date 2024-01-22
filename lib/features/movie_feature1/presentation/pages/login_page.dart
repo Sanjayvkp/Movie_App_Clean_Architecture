@@ -40,6 +40,7 @@ class LoginPage extends ConsumerWidget {
                 height: theme.spaces.space_100,
               ),
               TextfieldWidget(
+                keyboardtype: TextInputType.emailAddress,
                 controller: maindata.emailcontroller,
                 labeltext: data.emailtxt,
                 icondata: Icon(
@@ -51,6 +52,7 @@ class LoginPage extends ConsumerWidget {
                 height: theme.spaces.space_200,
               ),
               TextfieldWidget(
+                keyboardtype: TextInputType.visiblePassword,
                 controller: maindata.passwordcontroller,
                 labeltext: data.passwordtxt,
                 icondata: Icon(

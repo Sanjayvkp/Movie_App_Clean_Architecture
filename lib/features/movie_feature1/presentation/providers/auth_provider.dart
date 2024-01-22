@@ -15,10 +15,10 @@ import 'package:movie_application/features/movie_feature1/domain/usecases/signin
 import 'package:movie_application/features/movie_feature1/domain/usecases/signup_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/verify_email_usecase.dart';
 import 'package:movie_application/features/movie_feature1/domain/usecases/verify_otp_usecase.dart';
-import 'package:movie_application/features/movie_feature1/presentation/pages/home_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/login_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/otp_verified_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/providers/auth_state.dart';
+import 'package:movie_application/features/movie_feature2/presentation/pages/homepage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_provider.g.dart';
@@ -107,7 +107,7 @@ class Movie extends _$Movie {
   Future<void> verifyOtp(BuildContext context, String otp) async {
     try {
       await VerifyOtpUsecase(repository: repository)(state.verificationId, otp);
-      Future.sync(() => context.push(HomePage.routePath));
+      Future.sync(() => context.go(HomePage.routePath));
     } on BaseException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
     }

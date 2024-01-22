@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
+import 'package:show_hide_password/show_hide_password.dart';
 
 class TextfieldWidget extends ConsumerWidget {
   final String labeltext;
   final Icon icondata;
   final TextEditingController controller;
+  final TextInputType keyboardtype;
   const TextfieldWidget(
-      {super.key, required this.labeltext, required this.icondata,required this.controller});
+      {super.key,
+      required this.labeltext,
+      required this.icondata,
+      required this.controller,
+      required this.keyboardtype});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-  
     return SizedBox(
       width: MediaQuery.sizeOf(context).width / 1.1,
       child: TextField(
+        keyboardType: keyboardtype,
         autofocus: false,
         controller: controller,
         cursorColor: AppTheme.of(context).colors.secondary,

@@ -35,6 +35,7 @@ class LoginPageWithPhone extends ConsumerWidget {
                 height: theme.spaces.space_300,
               ),
               TextfieldWidget(
+                  keyboardtype: TextInputType.number,
                   labeltext: data.phonenumber,
                   icondata: Icon(
                     Icons.phone,

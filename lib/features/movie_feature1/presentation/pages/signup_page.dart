@@ -42,6 +42,7 @@ class SignupPage extends ConsumerWidget {
                 height: theme.spaces.space_300,
               ),
               TextfieldWidget(
+                keyboardtype: TextInputType.name,
                 controller: maindata.namecontroller,
                 labeltext: data.user,
                 icondata: Icon(
@@ -53,6 +54,7 @@ class SignupPage extends ConsumerWidget {
                 height: theme.spaces.space_200,
               ),
               TextfieldWidget(
+                keyboardtype: TextInputType.phone,
                 controller: maindata.numbercontroller,
                 labeltext: data.phonenumber,
                 icondata: Icon(
@@ -64,6 +66,7 @@ class SignupPage extends ConsumerWidget {
                 height: theme.spaces.space_200,
               ),
               TextfieldWidget(
+                keyboardtype: TextInputType.emailAddress,
                 controller: maindata.emailcontroller,
                 labeltext: data.emailtxt,
                 icondata: Icon(
@@ -75,6 +78,7 @@ class SignupPage extends ConsumerWidget {
                 height: theme.spaces.space_200,
               ),
               TextfieldWidget(
+                keyboardtype: TextInputType.visiblePassword,
                 controller: maindata.passwordcontroller,
                 labeltext: data.passwordtxt,
                 icondata: Icon(

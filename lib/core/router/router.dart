@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movie_application/features/movie_feature1/presentation/pages/home_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/login_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/login_with_phone_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/otp_verified_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/pages/signup_page.dart';
+import 'package:movie_application/features/movie_feature2/domain/entities/movie_entity.dart';
+import 'package:movie_application/features/movie_feature2/presentation/pages/homepage.dart';
+import 'package:movie_application/features/movie_feature2/presentation/pages/overview_page.dart';
 
 final router = GoRouter(initialLocation: HomePage.routePath, routes: [
   GoRoute(
@@ -42,6 +44,12 @@ final router = GoRouter(initialLocation: HomePage.routePath, routes: [
     path: OtpVerificationPage.routePath,
     builder: (context, state) {
       return const OtpVerificationPage();
+    },
+  ),
+  GoRoute(
+    path: OverviewPage.routePath,
+    builder: (context, state) {
+      return  OverviewPage(entity: state.extra as MovieEntity,);
     },
   ),
 ]);
