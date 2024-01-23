@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
+import 'package:movie_application/core/theme/color_palatte.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
   const BottomNavigationWidget({super.key});
@@ -7,12 +8,13 @@ class BottomNavigationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: AppTheme.of(context).colors.secondary,
+      elevation: 0,
+      backgroundColor: AppColorPalette.black.withOpacity(.80),
       selectedItemColor: AppTheme.of(context).colors.primary,
-      unselectedItemColor: AppTheme.of(context).colors.textSubtle,
+      unselectedItemColor: AppTheme.of(context).colors.textSubtlest,
       iconSize: AppTheme.of(context).spaces.space_300,
       type: BottomNavigationBarType.fixed,
-      items: [
+      items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: ''),
         BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
         BottomNavigationBarItem(

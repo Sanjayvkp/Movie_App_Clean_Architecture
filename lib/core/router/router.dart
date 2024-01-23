@@ -49,7 +49,9 @@ final router = GoRouter(initialLocation: HomePage.routePath, routes: [
   GoRoute(
     path: OverviewPage.routePath,
     builder: (context, state) {
-      return  OverviewPage(entity: state.extra as MovieEntity,);
+      return OverviewPage(
+        entity: state.extra as MovieEntity,
+      );
     },
   ),
 ]);

@@ -8,6 +8,7 @@ import 'package:movie_application/features/movie_feature2/presentation/widgets/b
 import 'package:movie_application/features/movie_feature2/presentation/widgets/carosel_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/listview_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/textbutton_widget.dart';
+import 'package:movie_application/features/movie_feature2/presentation/widgets/textfield_widget.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -17,16 +18,32 @@ class HomePage extends ConsumerWidget {
     final theme = AppTheme.of(context);
     final constants = HomePageConstants();
     return Scaffold(
+      extendBody: true,
       backgroundColor: theme.colors.secondary,
       appBar: AppBar(
         backgroundColor: theme.colors.secondary,
-        leading: const Icon(Icons.menu),
-        title: Text(
-          constants.appTitle,
-          style: theme.typography.h700
-              .copyWith(color: theme.colors.backgroundDanger),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 15),
+          child: CircleAvatar(
+            backgroundColor: theme.colors.textSubtle,
+            child: const Icon(Icons.person_2_outlined),
+          ),
         ),
-        centerTitle: true,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              constants.user,
+              style:
+                  theme.typography.h600.copyWith(color: theme.colors.primary),
+            ),
+            Text(
+              constants.info,
+              style: theme.typography.h300
+                  .copyWith(color: theme.colors.textSubtle),
+            )
+          ],
+        ),
         toolbarHeight: theme.spaces.space_400 * 3,
         actions: [
           IconButton(
@@ -38,17 +55,17 @@ class HomePage extends ConsumerWidget {
       ),
       body: ref.watch(movieHomeProvider).when(
         data: (data) {
-          // if (data == null) {
-          //   return const Center(
-          //     child: Text('Something went wrong'),
-          //   );
-          // }
           return SingleChildScrollView(
             child: Column(
               children: [
+                const TextFieldHomeWidget(
+                    labeltext: 'Search movie..', icondata: Icon(Icons.search)),
+                SizedBox(
+                  height: theme.spaces.space_300,
+                ),
                 CaroselWidget(itemcount: data.length, list: data),
                 SizedBox(
-                  height: theme.spaces.space_500,
+                  height: theme.spaces.space_300,
                 ),
                 Padding(
                   padding:
@@ -100,6 +117,9 @@ class HomePage extends ConsumerWidget {
                   ),
                 ),
                 SizedBox(
+                  height: theme.spaces.space_100,
+                ),
+                SizedBox(
                     height: MediaQuery.sizeOf(context).height / 7,
                     width: MediaQuery.sizeOf(context).width,
                     child: ListviewWidget(
@@ -121,10 +141,8 @@ class HomePage extends ConsumerWidget {
           );
         },
       ),
-      bottomNavigationBar: const Padding(
-        padding: EdgeInsets.all(10.0),
-        child: BottomNavigationWidget(),
-      ),
+      bottomNavigationBar:
+          const SizedBox(height: 70, child: BottomNavigationWidget()),
     );
   }
 }

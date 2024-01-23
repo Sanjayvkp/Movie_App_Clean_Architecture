@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_application/core/constants/api_constants/api_utils.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
+import 'package:movie_application/core/theme/color_palatte.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/movie_entity.dart';
+import 'package:movie_application/features/movie_feature2/presentation/widgets/container_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/iconbutton_widget.dart';
+import 'package:movie_application/features/movie_feature2/presentation/widgets/synopsis_widget.dart';
+import 'package:movie_application/features/movie_feature2/presentation/widgets/title_widget.dart';
 
 class OverviewPage extends StatelessWidget {
   const OverviewPage({super.key, required this.entity});
@@ -14,23 +18,20 @@ class OverviewPage extends StatelessWidget {
     final theme = AppTheme.of(context);
     return Scaffold(
       backgroundColor: theme.colors.secondary,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Container(
-                  width: MediaQuery.sizeOf(context).width,
-                  height: MediaQuery.sizeOf(context).height / 1.8,
+      body: Column(
+        children: [
+          Stack(
+            children: [
+              ContainerWidget(image: ApiUrls.linksimage + entity.poster_path),
+              Positioned(
+                top: theme.spaces.space_400,
+                left: 10,
+                child: Container(
+                  width: 40,
+                  height: 40,
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            ApiUrls.linksimage + entity.poster_path),
-                        fit: BoxFit.fill),
-                  ),
-                ),
-                Positioned(
-                  top: theme.spaces.space_400,
+                      color: theme.colors.secondary.withOpacity(.80),
+                      borderRadius: BorderRadius.circular(100)),
                   child: IconButtonWidget(
                     icon: Icons.arrow_back_ios_new,
                     onpressed: () {
@@ -38,50 +39,49 @@ class OverviewPage extends StatelessWidget {
                     },
                     color: theme.colors.primary,
                   ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: theme.spaces.space_300,
-            ),
-            SizedBox(
-              height: MediaQuery.sizeOf(context).height / 2.3,
-              width: MediaQuery.sizeOf(context).width / 1.1,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.sizeOf(context).width / 2,
-                          child: Text(
-                            entity.title,
-                            style: theme.typography.h700
-                                .copyWith(color: theme.colors.primary),
-                          ),
-                        ),
-                        Text(
-                          '⭐${entity.voteAverage}',
-                          style: theme.typography.h400
-                              .copyWith(color: theme.colors.primary),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: theme.spaces.space_300,
-                    ),
-                    Text(entity.overview,
-                        style: TextStyle(
-                            fontSize: theme.spaces.space_250,
-                            color: theme.colors.textInverse,
-                            fontWeight: FontWeight.w500))
-                  ],
                 ),
               ),
-            ),
-          ],
-        ),
+              Positioned(
+                bottom: 0,
+                child: TitleWidget(
+                  title: entity.title,
+                ),
+              ),
+              Positioned(
+                  right: 10,
+                  top: theme.spaces.space_400,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Container(
+                      width: theme.spaces.space_900,
+                      height: theme.spaces.space_400,
+                      color: AppTheme.of(context)
+                          .colors
+                          .secondary
+                          .withOpacity(.50),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.remove_red_eye,
+                            color: AppColorPalette.yellow,
+                          ),
+                          Text(
+                            entity.voteCount.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ))
+            ],
+          ),
+          SynopsisWidget(
+              language: entity.originalLanguage,
+              rating: entity.voteAverage.toString(),
+              overview: entity.overview,
+              releaseyear: entity.releaseDate.year.toString())
+        ],
       ),
     );
   }

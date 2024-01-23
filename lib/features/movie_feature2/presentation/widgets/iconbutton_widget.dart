@@ -17,6 +17,7 @@ class IconButtonWidget extends StatelessWidget {
       onPressed: onpressed,
       icon: Icon(
         icon,
+        size: 20,
         color: color,
       ),
     );

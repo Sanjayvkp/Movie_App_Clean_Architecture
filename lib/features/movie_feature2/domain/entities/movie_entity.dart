@@ -12,5 +12,7 @@ class MovieEntity with _$MovieEntity {
       // ignore: non_constant_identifier_names
       required String poster_path,
       required DateTime releaseDate,
-      required double voteAverage}) = _MovieEntity;
+      required double voteAverage,
+      required String originalLanguage,
+      required int voteCount}) = _MovieEntity;
 }

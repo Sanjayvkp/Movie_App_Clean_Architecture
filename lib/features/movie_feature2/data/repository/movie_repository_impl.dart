@@ -22,6 +22,8 @@ class MovieRepositoryImpl implements MovieRepository {
           releaseDate: result.releaseDate,
           poster_path: result.posterPath,
           voteAverage: result.voteAverage,
+          voteCount: result.voteCount,
+          originalLanguage: result.originalLanguage,
         )
     ];
     return results;
