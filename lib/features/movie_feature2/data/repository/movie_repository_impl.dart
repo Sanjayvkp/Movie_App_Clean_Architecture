@@ -28,6 +28,46 @@ class MovieRepositoryImpl implements MovieRepository {
     ];
     return results;
   }
+
+  @override
+  Future<List<MovieEntity>> getTopRated() async {
+    final data = await datasource.getTopRated();
+    late List<MovieEntity> results;
+    results = [
+      for (final result in data.results)
+        MovieEntity(
+          title: result.originalTitle,
+          overview: result.overview,
+          backdrop_path: result.backdropPath,
+          releaseDate: result.releaseDate,
+          poster_path: result.posterPath,
+          voteAverage: result.voteAverage,
+          voteCount: result.voteCount,
+          originalLanguage: result.originalLanguage,
+        )
+    ];
+    return results;
+  }
+
+  @override
+  Future<List<MovieEntity>> getPopular() async {
+    final data = await datasource.getPopular();
+    late List<MovieEntity> results;
+    results = [
+      for (final result in data.results)
+        MovieEntity(
+          title: result.originalTitle,
+          overview: result.overview,
+          backdrop_path: result.backdropPath,
+          releaseDate: result.releaseDate,
+          poster_path: result.posterPath,
+          voteAverage: result.voteAverage,
+          voteCount: result.voteCount,
+          originalLanguage: result.originalLanguage,
+        )
+    ];
+    return results;
+  }
 }
 
 @riverpod

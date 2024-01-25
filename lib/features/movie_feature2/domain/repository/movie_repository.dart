@@ -2,4 +2,6 @@ import 'package:movie_application/features/movie_feature2/domain/entities/movie_
 
 abstract class MovieRepository {
   Future<List<MovieEntity>> getMovies();
+  Future<List<MovieEntity>> getTopRated();
+  Future<List<MovieEntity>> getPopular();
 }

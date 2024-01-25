@@ -33,7 +33,7 @@ class SynopsisWidget extends StatelessWidget {
                   style: TextStyle(
                       fontSize: theme.spaces.space_250,
                       color: theme.colors.textInverse,
-                      fontWeight: FontWeight.w500)),
+                      fontWeight: FontWeight.w400)),
             ),
           ),
           Row(
@@ -59,9 +59,19 @@ class SynopsisWidget extends StatelessWidget {
                       AppTheme.of(context).colors.textSubtle.withOpacity(.60)),
             ],
           ),
-          PlayButtonWidget(
-            btntxt: HomePageConstants().playtxt,
-            onPressed: () {},
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              PlayButtonWidget(
+                btntxt: HomePageConstants().playtxt,
+                onPressed: () {},
+              ),
+              FloatingActionButton.small(
+                backgroundColor: theme.colors.textSubtle.withOpacity(.50),
+                onPressed: () {},
+                child: const Icon(Icons.add),
+              )
+            ],
           )
         ],
       ),

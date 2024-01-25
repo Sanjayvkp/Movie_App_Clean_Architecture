@@ -22,7 +22,11 @@ class OverviewPage extends StatelessWidget {
         children: [
           Stack(
             children: [
-              ContainerWidget(image: ApiUrls.linksimage + entity.poster_path),
+              ContainerWidget(
+                image: ApiUrls.linksimage + entity.poster_path,
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height / 1.8,
+              ),
               Positioned(
                 top: theme.spaces.space_400,
                 left: 10,
@@ -33,6 +37,7 @@ class OverviewPage extends StatelessWidget {
                       color: theme.colors.secondary.withOpacity(.80),
                       borderRadius: BorderRadius.circular(100)),
                   child: IconButtonWidget(
+                    size: 20,
                     icon: Icons.arrow_back_ios_new,
                     onpressed: () {
                       context.pop();
@@ -78,7 +83,7 @@ class OverviewPage extends StatelessWidget {
           ),
           SynopsisWidget(
               language: entity.originalLanguage,
-              rating: entity.voteAverage.toString(),
+              rating: entity.voteAverage.toStringAsFixed(1),
               overview: entity.overview,
               releaseyear: entity.releaseDate.year.toString())
         ],

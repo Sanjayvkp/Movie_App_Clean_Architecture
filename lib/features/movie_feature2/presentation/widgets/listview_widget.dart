@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_application/core/constants/api_constants/api_utils.dart';
@@ -9,16 +8,15 @@ import 'package:movie_application/features/movie_feature2/presentation/pages/ove
 
 class ListviewWidget extends ConsumerWidget {
   final images = ApiUrls.linksimage;
-  final List<MovieEntity> list;
-  final int itemcount;
-  const ListviewWidget(
-      {super.key, required this.list, required this.itemcount});
+  final List<MovieEntity> value;
+  const ListviewWidget({super.key, required this.value});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = AppTheme.of(context);
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: itemcount,
+      itemCount: value.length,
       itemBuilder: (context, index) {
         return Row(
           children: [
@@ -27,18 +25,40 @@ class ListviewWidget extends ConsumerWidget {
             ),
             InkWell(
               onTap: () =>
-                  context.push(OverviewPage.routePath, extra: list[index]),
-              child: Container(
-                height: MediaQuery.sizeOf(context).height / 5,
-                width: MediaQuery.sizeOf(context).width / 2,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: AppTheme.of(context).colors.textSubtle,
-                    image: DecorationImage(
-                        image: NetworkImage(
-                          images + list[index].backdrop_path,
-                        ),
-                        fit: BoxFit.cover)),
+                  context.push(OverviewPage.routePath, extra: value[index]),
+              child: Stack(
+                children: [
+                  Container(
+                    height: MediaQuery.sizeOf(context).height / 5,
+                    width: MediaQuery.sizeOf(context).width / 1.3,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: AppTheme.of(context).colors.primary,
+                        image: DecorationImage(
+                            image: NetworkImage(
+                              images + value[index].backdrop_path,
+                            ),
+                            fit: BoxFit.fill)),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width / 1.3,
+                      height: MediaQuery.sizeOf(context).height / 19,
+                      decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(.70),
+                          borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10))),
+                      child: Center(
+                          child: Text(
+                        value[index].title,
+                        style: theme.typography.h400
+                            .copyWith(color: theme.colors.primary),
+                      )),
+                    ),
+                  )
+                ],
               ),
             ),
           ],

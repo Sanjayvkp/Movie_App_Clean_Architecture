@@ -2,4 +2,6 @@ import 'package:movie_application/features/movie_feature2/data/models/movie_mode
 
 abstract class ApiServicesDatasource {
   Future<MovieModel> getMovies();
+  Future<MovieModel> getTopRated();
+  Future<MovieModel> getPopular();
 }

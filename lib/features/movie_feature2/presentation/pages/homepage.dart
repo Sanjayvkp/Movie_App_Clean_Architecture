@@ -6,6 +6,7 @@ import 'package:movie_application/features/movie_feature1/presentation/providers
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/bottomnavigation_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/carosel_widget.dart';
+import 'package:movie_application/features/movie_feature2/presentation/widgets/grid_view_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/listview_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/textbutton_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/textfield_widget.dart';
@@ -63,7 +64,8 @@ class HomePage extends ConsumerWidget {
                 SizedBox(
                   height: theme.spaces.space_300,
                 ),
-                CaroselWidget(itemcount: data.length, list: data),
+                CaroselWidget(
+                    itemcount: data.getMovies.length, list: data.getMovies),
                 SizedBox(
                   height: theme.spaces.space_300,
                 ),
@@ -89,11 +91,10 @@ class HomePage extends ConsumerWidget {
                   height: theme.spaces.space_200,
                 ),
                 SizedBox(
-                    height: MediaQuery.sizeOf(context).height / 7,
+                    height: MediaQuery.sizeOf(context).height / 6,
                     width: MediaQuery.sizeOf(context).width,
                     child: ListviewWidget(
-                      itemcount: data.length,
-                      list: data,
+                      value: data.getPopular,
                     )),
                 SizedBox(
                   height: AppTheme.of(context).spaces.space_200,
@@ -120,11 +121,10 @@ class HomePage extends ConsumerWidget {
                   height: theme.spaces.space_100,
                 ),
                 SizedBox(
-                    height: MediaQuery.sizeOf(context).height / 7,
-                    width: MediaQuery.sizeOf(context).width,
-                    child: ListviewWidget(
-                      itemcount: data.length,
-                      list: data,
+                    height: MediaQuery.sizeOf(context).height / 2,
+                    width: MediaQuery.sizeOf(context).width / 1.1,
+                    child: GridViewWidget(
+                      value: data.getTopRated,
                     )),
               ],
             ),
@@ -132,7 +132,11 @@ class HomePage extends ConsumerWidget {
         },
         error: (error, stackTrace) {
           return Center(
-            child: Text(error.toString()),
+            child: TextButton(
+                onPressed: () {
+                  ref.invalidate(movieHomeProvider);
+                },
+                child: const Text('Retry')),
           );
         },
         loading: () {
