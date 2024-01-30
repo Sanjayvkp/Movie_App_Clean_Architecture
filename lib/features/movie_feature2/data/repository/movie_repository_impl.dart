@@ -1,5 +1,6 @@
 import 'package:movie_application/features/movie_feature2/data/datasources/api_service_datasource.dart';
 import 'package:movie_application/features/movie_feature2/data/datasources/api_service_datasource_impl.dart';
+import 'package:movie_application/features/movie_feature2/data/models/firestore_model.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/movie_entity.dart';
 import 'package:movie_application/features/movie_feature2/domain/repository/movie_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,6 +18,7 @@ class MovieRepositoryImpl implements MovieRepository {
       for (final result in data.results)
         MovieEntity(
           title: result.originalTitle,
+          id: result.id,
           overview: result.overview,
           backdrop_path: result.backdropPath,
           releaseDate: result.releaseDate,
@@ -24,6 +26,7 @@ class MovieRepositoryImpl implements MovieRepository {
           voteAverage: result.voteAverage,
           voteCount: result.voteCount,
           originalLanguage: result.originalLanguage,
+          originalTitle: result.title,
         )
     ];
     return results;
@@ -37,6 +40,7 @@ class MovieRepositoryImpl implements MovieRepository {
       for (final result in data.results)
         MovieEntity(
           title: result.originalTitle,
+          id: result.id,
           overview: result.overview,
           backdrop_path: result.backdropPath,
           releaseDate: result.releaseDate,
@@ -44,6 +48,7 @@ class MovieRepositoryImpl implements MovieRepository {
           voteAverage: result.voteAverage,
           voteCount: result.voteCount,
           originalLanguage: result.originalLanguage,
+          originalTitle: result.title,
         )
     ];
     return results;
@@ -57,6 +62,7 @@ class MovieRepositoryImpl implements MovieRepository {
       for (final result in data.results)
         MovieEntity(
           title: result.originalTitle,
+          id: result.id,
           overview: result.overview,
           backdrop_path: result.backdropPath,
           releaseDate: result.releaseDate,
@@ -64,10 +70,17 @@ class MovieRepositoryImpl implements MovieRepository {
           voteAverage: result.voteAverage,
           voteCount: result.voteCount,
           originalLanguage: result.originalLanguage,
+          originalTitle: result.title,
         )
     ];
     return results;
   }
+
+ 
+
+  // @override
+  // Future<List<TrailerEntity>> getMovieTrailers(int movieId) async{
+  // }
 }
 
 @riverpod

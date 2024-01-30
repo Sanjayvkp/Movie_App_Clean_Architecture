@@ -10,7 +10,7 @@ class TitleWidget extends StatelessWidget {
     return Container(
       width: MediaQuery.sizeOf(context).width,
       height: 80,
-      color: AppTheme.of(context).colors.secondary.withOpacity(.50),
+      color: AppTheme.of(context).colors.secondary.withOpacity(.80),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -14,14 +14,14 @@ class PlayButtonWidget extends ConsumerWidget {
         style: ElevatedButton.styleFrom(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            minimumSize: Size(MediaQuery.sizeOf(context).width / 1.4,
+            minimumSize: Size(MediaQuery.sizeOf(context).width / 1.30,
                 MediaQuery.sizeOf(context).height / 16),
             backgroundColor: AppTheme.of(context).colors.backgroundDanger),
         onPressed: onPressed,
         child: Text(
           btntxt,
           style: TextStyle(
-              color: AppTheme.of(context).colors.primary, fontSize: 20),
+              color: AppTheme.of(context).colors.secondary, fontSize: 20),
         ));
   }
 }

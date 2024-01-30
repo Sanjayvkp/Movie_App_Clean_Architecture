@@ -28,7 +28,7 @@ class CliprrectWidget extends ConsumerWidget {
             style: AppTheme.of(context)
                 .typography
                 .h500
-                .copyWith(color: AppTheme.of(context).colors.primary),
+                .copyWith(color: AppTheme.of(context).colors.secondary),
           ),
         ),
       ),

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_application/core/constants/homepage/home_page_constants.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
 import 'package:movie_application/features/movie_feature1/presentation/providers/auth_provider.dart';
+import 'package:movie_application/features/movie_feature2/presentation/pages/gridview_page.dart';
+import 'package:movie_application/features/movie_feature2/presentation/pages/profile_page.dart';
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/bottomnavigation_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/carosel_widget.dart';
-import 'package:movie_application/features/movie_feature2/presentation/widgets/grid_view_widget.dart';
+import 'package:movie_application/features/movie_feature2/presentation/widgets/heading_widget.dart';
+import 'package:movie_application/features/movie_feature2/presentation/widgets/toprated_listview_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/listview_widget.dart';
-import 'package:movie_application/features/movie_feature2/presentation/widgets/textbutton_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/textfield_widget.dart';
 
 class HomePage extends ConsumerWidget {
@@ -20,131 +23,111 @@ class HomePage extends ConsumerWidget {
     final constants = HomePageConstants();
     return Scaffold(
       extendBody: true,
-      backgroundColor: theme.colors.secondary,
       appBar: AppBar(
-        backgroundColor: theme.colors.secondary,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: CircleAvatar(
-            backgroundColor: theme.colors.textSubtle,
-            child: const Icon(Icons.person_2_outlined),
+        toolbarHeight: 80,
+        backgroundColor: theme.colors.primary,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            context.push(ProfilePage.routePath);
+          },
+          icon: Icon(
+            Icons.person,
+            color: theme.colors.secondary,
           ),
         ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              constants.user,
-              style:
-                  theme.typography.h600.copyWith(color: theme.colors.primary),
-            ),
-            Text(
-              constants.info,
-              style: theme.typography.h300
-                  .copyWith(color: theme.colors.textSubtle),
-            )
-          ],
+        title: Text(
+          constants.appTitle,
+          style: TextStyle(color: theme.colors.secondary),
         ),
-        toolbarHeight: theme.spaces.space_400 * 3,
         actions: [
           IconButton(
-              onPressed: () {
-                ref.read(movieProvider.notifier).signOut(context);
-              },
-              icon: const Icon(Icons.logout_rounded))
+              onPressed: () =>
+                  ref.read(movieProvider.notifier).signOut(context),
+              icon: Icon(
+                Icons.logout,
+                color: theme.colors.secondary,
+              ))
         ],
       ),
-      body: ref.watch(movieHomeProvider).when(
-        data: (data) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                const TextFieldHomeWidget(
-                    labeltext: 'Search movie..', icondata: Icon(Icons.search)),
-                SizedBox(
-                  height: theme.spaces.space_300,
-                ),
-                CaroselWidget(
-                    itemcount: data.getMovies.length, list: data.getMovies),
-                SizedBox(
-                  height: theme.spaces.space_300,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: theme.spaces.space_200),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: ref.watch(movieHomeProvider).isRefreshing
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : ref.watch(movieHomeProvider).when(
+              data: (data) {
+                return SingleChildScrollView(
+                  child: Column(
                     children: [
-                      Text(
-                        constants.trending,
-                        style: theme.typography.h500
-                            .copyWith(color: theme.colors.primary),
+                      SizedBox(
+                        height: theme.spaces.space_300,
                       ),
-                      TextButtonWidget(
-                        text: constants.seemore,
-                        onPressed: () {},
-                      )
+                      TextFieldHomeWidget(
+                          labeltext: HomePageConstants().searchText,
+                          icondata: const Icon(Icons.search)),
+                      SizedBox(
+                        height: theme.spaces.space_300,
+                      ),
+                      CaroselWidget(
+                          itemcount: data.getMovies.length,
+                          list: data.getMovies),
+                      SizedBox(
+                        height: theme.spaces.space_300,
+                      ),
+                      HeadingWidget(
+                        text: constants.trending,
+                        onPressed: () {
+                          context.push(GridViewPage.routePath,
+                              extra: (data.getPopular, constants.trending));
+                        },
+                      ),
+                      SizedBox(
+                        height: theme.spaces.space_100,
+                      ),
+                      SizedBox(
+                          height: MediaQuery.sizeOf(context).height / 6,
+                          width: MediaQuery.sizeOf(context).width,
+                          child: ListviewWidget(
+                            value: data.getPopular,
+                          )),
+                      SizedBox(
+                        height: AppTheme.of(context).spaces.space_200,
+                      ),
+                      HeadingWidget(
+                        text: constants.topRated,
+                        onPressed: () {
+                          context.push(GridViewPage.routePath,
+                              extra: (data.getTopRated, constants.topRated));
+                        },
+                      ),
+                      SizedBox(
+                        height: theme.spaces.space_100,
+                      ),
+                      SizedBox(
+                          height: MediaQuery.sizeOf(context).height / 5,
+                          width: MediaQuery.sizeOf(context).width,
+                          child: ListViewTopRatedWidget(
+                            value: data.getTopRated,
+                          )),
                     ],
                   ),
-                ),
-                SizedBox(
-                  height: theme.spaces.space_200,
-                ),
-                SizedBox(
-                    height: MediaQuery.sizeOf(context).height / 6,
-                    width: MediaQuery.sizeOf(context).width,
-                    child: ListviewWidget(
-                      value: data.getPopular,
-                    )),
-                SizedBox(
-                  height: AppTheme.of(context).spaces.space_200,
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: theme.spaces.space_200),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        constants.topRated,
-                        style: theme.typography.h500
-                            .copyWith(color: theme.colors.primary),
-                      ),
-                      TextButtonWidget(
-                        text: constants.seemore,
-                        onPressed: () {},
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: theme.spaces.space_100,
-                ),
-                SizedBox(
-                    height: MediaQuery.sizeOf(context).height / 2,
-                    width: MediaQuery.sizeOf(context).width / 1.1,
-                    child: GridViewWidget(
-                      value: data.getTopRated,
-                    )),
-              ],
+                );
+              },
+              error: (error, stackTrace) {
+                return Center(
+                  child: TextButton(
+                      onPressed: () {
+                        ref.invalidate(movieHomeProvider);
+                      },
+                      child: const Text('Retry')),
+                );
+              },
+              loading: () {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
             ),
-          );
-        },
-        error: (error, stackTrace) {
-          return Center(
-            child: TextButton(
-                onPressed: () {
-                  ref.invalidate(movieHomeProvider);
-                },
-                child: const Text('Retry')),
-          );
-        },
-        loading: () {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      ),
       bottomNavigationBar:
           const SizedBox(height: 70, child: BottomNavigationWidget()),
     );

@@ -16,7 +16,7 @@ class ListviewWidget extends ConsumerWidget {
     final theme = AppTheme.of(context);
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: value.length,
+      itemCount: 10,
       itemBuilder: (context, index) {
         return Row(
           children: [
@@ -33,7 +33,6 @@ class ListviewWidget extends ConsumerWidget {
                     width: MediaQuery.sizeOf(context).width / 1.3,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: AppTheme.of(context).colors.primary,
                         image: DecorationImage(
                             image: NetworkImage(
                               images + value[index].backdrop_path,

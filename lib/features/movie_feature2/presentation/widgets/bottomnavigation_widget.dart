@@ -9,8 +9,8 @@ class BottomNavigationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       elevation: 0,
-      backgroundColor: AppColorPalette.black.withOpacity(.80),
-      selectedItemColor: AppTheme.of(context).colors.primary,
+      backgroundColor: AppColorPalette.white.withOpacity(.90),
+      selectedItemColor: AppTheme.of(context).colors.secondary,
       unselectedItemColor: AppTheme.of(context).colors.textSubtlest,
       iconSize: AppTheme.of(context).spaces.space_300,
       type: BottomNavigationBarType.fixed,

@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movie_application/core/constants/api_constants/api_utils.dart';
 
 import 'package:movie_application/features/movie_feature2/data/datasources/api_service_datasource.dart';
+import 'package:movie_application/features/movie_feature2/data/models/firestore_model.dart';
 import 'package:movie_application/features/movie_feature2/data/models/movie_model.dart';
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -33,6 +35,19 @@ class ApiServiceDatasourceImpl implements ApiServicesDatasource {
     final Response response = await dio.get(popularLink);
     return MovieModel.fromJson(response.data);
   }
+
+//   @override
+//   Future<List<TrailerEntity>> getTrailer(movieId) async {
+//     try{
+//  final Response response = await dio.get(
+//         '$link/movie/$movieId/videos',
+//         queryParameters: {
+//           'api_key': token,
+//         },
+//       );
+//     }
+
+//   }
 }
 
 @riverpod

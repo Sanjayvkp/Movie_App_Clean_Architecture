@@ -25,13 +25,13 @@ class TextFieldHomeWidget extends ConsumerWidget {
                 horizontal: AppTheme.of(context).spaces.space_400),
             hintText: labeltext,
             prefixIcon: icondata,
-            prefixIconColor: AppColorPalette.white.withOpacity(.50),
-            hintStyle: TextStyle(color: AppColorPalette.white.withOpacity(.50)),
-            fillColor: AppTheme.of(context).colors.textSubtle.withOpacity(.50),
+            prefixIconColor: AppColorPalette.black.withOpacity(.50),
+            hintStyle: TextStyle(color: AppColorPalette.black.withOpacity(.50)),
+            fillColor: AppTheme.of(context).colors.primary.withOpacity(.50),
             filled: true,
             border: OutlineInputBorder(
                 borderSide:
-                    BorderSide(color: AppTheme.of(context).colors.primary),
+                    BorderSide(color: AppTheme.of(context).colors.secondary),
                 borderRadius: BorderRadius.circular(20))),
       ),
     );

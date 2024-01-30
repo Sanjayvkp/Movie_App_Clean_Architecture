@@ -5,7 +5,11 @@ class ContainerWidget extends ConsumerWidget {
   final String image;
   final double width;
   final double height;
-  const ContainerWidget({super.key, required this.image,required this.height,required this.width});
+  const ContainerWidget(
+      {super.key,
+      required this.image,
+      required this.height,
+      required this.width});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -13,7 +17,8 @@ class ContainerWidget extends ConsumerWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        image: DecorationImage(image: NetworkImage(image), fit: BoxFit.fill),
+        borderRadius: BorderRadius.circular(15),
+        image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover),
       ),
     );
   }
