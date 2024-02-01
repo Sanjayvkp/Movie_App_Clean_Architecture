@@ -9,6 +9,7 @@ import 'package:movie_application/features/movie_feature2/presentation/pages/pro
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/bottomnavigation_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/carosel_widget.dart';
+import 'package:movie_application/features/movie_feature2/presentation/widgets/drawer_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/heading_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/toprated_listview_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/listview_widget.dart';
@@ -16,7 +17,7 @@ import 'package:movie_application/features/movie_feature2/presentation/widgets/t
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
-  static const routePath = '/';
+  static const routePath = '/home';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = AppTheme.of(context);
@@ -27,29 +28,23 @@ class HomePage extends ConsumerWidget {
         toolbarHeight: 80,
         backgroundColor: theme.colors.primary,
         elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            context.push(ProfilePage.routePath);
-          },
-          icon: Icon(
-            Icons.person,
-            color: theme.colors.secondary,
-          ),
+        centerTitle: true,
+        leading: Builder(
+          builder: (context) => IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.black,
+              )),
         ),
         title: Text(
           constants.appTitle,
           style: TextStyle(color: theme.colors.secondary),
         ),
-        actions: [
-          IconButton(
-              onPressed: () =>
-                  ref.read(movieProvider.notifier).signOut(context),
-              icon: Icon(
-                Icons.logout,
-                color: theme.colors.secondary,
-              ))
-        ],
       ),
+      drawer: const DrawerWidget(),
       body: ref.watch(movieHomeProvider).isRefreshing
           ? const Center(
               child: CircularProgressIndicator(),
@@ -59,12 +54,6 @@ class HomePage extends ConsumerWidget {
                 return SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: theme.spaces.space_300,
-                      ),
-                      TextFieldHomeWidget(
-                          labeltext: HomePageConstants().searchText,
-                          icondata: const Icon(Icons.search)),
                       SizedBox(
                         height: theme.spaces.space_300,
                       ),
@@ -88,7 +77,10 @@ class HomePage extends ConsumerWidget {
                           height: MediaQuery.sizeOf(context).height / 6,
                           width: MediaQuery.sizeOf(context).width,
                           child: ListviewWidget(
+                            height: MediaQuery.sizeOf(context).height / 5,
+                            width: MediaQuery.sizeOf(context).width / 1.3,
                             value: data.getPopular,
+                            itemcount: 10,
                           )),
                       SizedBox(
                         height: AppTheme.of(context).spaces.space_200,
@@ -128,8 +120,6 @@ class HomePage extends ConsumerWidget {
                 );
               },
             ),
-      bottomNavigationBar:
-          const SizedBox(height: 70, child: BottomNavigationWidget()),
     );
   }
 }

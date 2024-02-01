@@ -5,8 +5,14 @@ import 'package:movie_application/core/theme/app_theme.dart';
 class PlayButtonWidget extends ConsumerWidget {
   final String btntxt;
   final void Function()? onPressed;
+  final Color bgcolor;
+  final Color textcolor;
   const PlayButtonWidget(
-      {super.key, required this.btntxt, required this.onPressed});
+      {super.key,
+      required this.btntxt,
+      required this.onPressed,
+      required this.bgcolor,
+      required this.textcolor});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -16,12 +22,11 @@ class PlayButtonWidget extends ConsumerWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             minimumSize: Size(MediaQuery.sizeOf(context).width / 1.30,
                 MediaQuery.sizeOf(context).height / 16),
-            backgroundColor: AppTheme.of(context).colors.backgroundDanger),
+            backgroundColor: bgcolor),
         onPressed: onPressed,
         child: Text(
           btntxt,
-          style: TextStyle(
-              color: AppTheme.of(context).colors.secondary, fontSize: 20),
+          style: TextStyle(color: textcolor, fontSize: 20),
         ));
   }
 }

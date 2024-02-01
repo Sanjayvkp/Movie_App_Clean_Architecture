@@ -11,4 +11,10 @@ class HomePageConstants {
   final info = 'Enjoy your favourite movie';
   final year = 'Release year : ';
   final overview = 'Synopsis';
+  final watclist = 'Your Watchlist';
+  final drawerprofile = 'Profile';
+  final drawerwatchlist = 'Watchlist';
+  final drawerlogout = 'Logout';
+  final overviewsuccess = 'Successfully added to your watchlist';
+  final reviewsubmit = 'Submit';
 }

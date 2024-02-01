@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
 import 'package:movie_application/core/theme/color_palatte.dart';
+import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
 
-class BottomNavigationWidget extends StatelessWidget {
+class BottomNavigationWidget extends ConsumerWidget {
   const BottomNavigationWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return BottomNavigationBar(
+      currentIndex: ref.watch(pageProvider),
+      onTap: (value) {
+        ref.read(movieHomeProvider.notifier).pageController.jumpToPage(value);
+      },
       elevation: 0,
-      backgroundColor: AppColorPalette.white.withOpacity(.90),
+      backgroundColor: AppColorPalette.white.withOpacity(.50),
       selectedItemColor: AppTheme.of(context).colors.secondary,
       unselectedItemColor: AppTheme.of(context).colors.textSubtlest,
       iconSize: AppTheme.of(context).spaces.space_300,

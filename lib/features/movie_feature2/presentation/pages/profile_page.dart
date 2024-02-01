@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:movie_application/core/theme/app_theme.dart';
 import 'package:movie_application/core/utils/snackbar_utils.dart';
 
 final imageUrlProvider = StateProvider<String>((ref) {
@@ -19,7 +20,13 @@ class ProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile Page"),
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: Text(
+          "Profile Page",
+          style: TextStyle(color: AppTheme.of(context).colors.secondary),
+        ),
+        backgroundColor: AppTheme.of(context).colors.primary,
+        centerTitle: true,
       ),
       body: Center(
         child: InkWell(

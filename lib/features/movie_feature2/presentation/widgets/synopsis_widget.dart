@@ -50,6 +50,7 @@ class SynopsisWidget extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CliprrectWidget(
+                  ratingtext: theme.colors.secondary,
                   height: theme.spaces.space_500,
                   text: HomePageConstants().year + releaseyear,
                   width: theme.spaces.space_250 * 9,
@@ -58,6 +59,7 @@ class SynopsisWidget extends ConsumerWidget {
                       .textSubtlest
                       .withOpacity(.30)),
               CliprrectWidget(
+                  ratingtext: theme.colors.secondary,
                   height: theme.spaces.space_500,
                   text: language,
                   width: theme.spaces.space_500 * 2,
@@ -66,6 +68,7 @@ class SynopsisWidget extends ConsumerWidget {
                       .textSubtlest
                       .withOpacity(.30)),
               CliprrectWidget(
+                  ratingtext: theme.colors.secondary,
                   height: theme.spaces.space_500,
                   text: '⭐$rating',
                   width: theme.spaces.space_500 * 2,
@@ -80,19 +83,20 @@ class SynopsisWidget extends ConsumerWidget {
             children: [
               PlayButtonWidget(
                 btntxt: HomePageConstants().playtxt,
+                bgcolor: theme.colors.backgroundDanger,
+                textcolor: theme.colors.secondary,
                 onPressed: () {
                   context.push(YoutubePlayerPage.routePath);
                 },
               ),
               FloatingActionButton.small(
-                elevation: 0,
-                backgroundColor: theme.colors.textSubtlest.withOpacity(.50),
-                onPressed: onPressed,
-                child: Icon(
-                  Icons.add,
-                  color: theme.colors.secondary,
-                ),
-              )
+                  backgroundColor: theme.colors.textSubtlest,
+                  elevation: 0,
+                  onPressed: onPressed,
+                  child: const Icon(
+                    Icons.note_alt_outlined,
+                    size: 25,
+                  )),
             ],
           )
         ],

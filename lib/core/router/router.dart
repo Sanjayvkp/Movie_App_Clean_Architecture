@@ -9,15 +9,17 @@ import 'package:movie_application/features/movie_feature2/presentation/pages/gri
 import 'package:movie_application/features/movie_feature2/presentation/pages/homepage.dart';
 import 'package:movie_application/features/movie_feature2/presentation/pages/overview_page.dart';
 import 'package:movie_application/features/movie_feature2/presentation/pages/profile_page.dart';
+import 'package:movie_application/features/movie_feature2/presentation/pages/watchlist_page.dart';
 import 'package:movie_application/features/movie_feature2/presentation/pages/youtube_trailer_page.dart';
+import 'package:movie_application/features/movie_feature2/presentation/widgets/pageview_widget.dart';
 
 final router = GoRouter(
-  initialLocation: HomePage.routePath,
+  initialLocation: PageViewWidget.routePath,
   routes: [
     GoRoute(
-      path: HomePage.routePath,
+      path: PageViewWidget.routePath,
       builder: (context, state) {
-        return const HomePage();
+        return const PageViewWidget();
       },
       redirect: (context, state) {
         final user = FirebaseAuth.instance.currentUser;
@@ -25,6 +27,12 @@ final router = GoRouter(
           return LoginPage.routePath;
         }
         return null;
+      },
+    ),
+    GoRoute(
+      path: HomePage.routePath,
+      builder: (context, state) {
+        return const HomePage();
       },
     ),
     GoRoute(
@@ -56,6 +64,7 @@ final router = GoRouter(
       builder: (context, state) {
         return OverviewPage(
           entity: state.extra as MovieEntity,
+          
         );
       },
     ),
@@ -76,6 +85,10 @@ final router = GoRouter(
     GoRoute(
       path: YoutubePlayerPage.routePath,
       builder: (context, state) => const YoutubePlayerPage(),
+    ),
+    GoRoute(
+      path: WatchListPage.routePath,
+      builder: (context, state) => const WatchListPage(),
     ),
   ],
 );

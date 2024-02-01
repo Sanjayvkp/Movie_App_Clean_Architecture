@@ -17,7 +17,7 @@ class GridViewPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           text,
-          style: TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
         ),
         backgroundColor: AppTheme.of(context).colors.primary,
         elevation: 0,

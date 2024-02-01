@@ -7,17 +7,19 @@ class CliprrectWidget extends ConsumerWidget {
   final double width;
   final String text;
   final Color color;
+  final Color ratingtext;
   const CliprrectWidget(
       {super.key,
       required this.height,
       required this.text,
       required this.width,
-      required this.color});
+      required this.color,
+      required this.ratingtext});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(5),
       child: Container(
         width: width,
         height: height,
@@ -27,8 +29,8 @@ class CliprrectWidget extends ConsumerWidget {
             text,
             style: AppTheme.of(context)
                 .typography
-                .h500
-                .copyWith(color: AppTheme.of(context).colors.secondary),
+                .h400
+                .copyWith(color: ratingtext),
           ),
         ),
       ),

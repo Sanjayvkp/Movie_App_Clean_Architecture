@@ -6,15 +6,25 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'firebase_datasource_impl.g.dart';
 
 class FirebaseDataSourceImpl implements FireBaseDataSource {
-  final collection = FirebaseFirestore.instance.collection('watchlist');
+  final collection = FirebaseFirestore.instance
+      .collection('watchlist')
+      .withConverter(
+          fromFirestore: FireStoreModel.fromFirestore,
+          toFirestore: (model, _) => model.toFirestore());
   @override
   Future<void> addtoFireStore(FireStoreModel model) async {
-    await collection.doc(model.id.toString()).set(model.toFirestore());
+    await collection.doc(model.id.toString()).set(model);
   }
-  
+
   @override
-  Future<void> getFromFireStore(FireStoreModel model) async{
-    
+  Stream<QuerySnapshot<FireStoreModel>> getFromFireStore() {
+    final querySnapshot = collection.snapshots();
+    return querySnapshot;
+  }
+
+  @override
+  Future<void> deleteFromFireStore(String id) async {
+    await collection.doc(id).delete();
   }
 }
 
