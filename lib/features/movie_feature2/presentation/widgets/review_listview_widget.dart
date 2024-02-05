@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_application/core/theme/app_theme.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/review_entity.dart';
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
 
@@ -13,7 +14,10 @@ class CommentListViewWidget extends ConsumerWidget {
       width: MediaQuery.sizeOf(context).width,
       // height: 600,
       child: ListView.builder(
+        physics: const ClampingScrollPhysics(),
         itemCount: entity.length,
+        shrinkWrap: true,
+        padding: EdgeInsets.only(bottom: AppTheme.of(context).spaces.space_200),
         itemBuilder: (context, index) {
           return Column(
             children: [

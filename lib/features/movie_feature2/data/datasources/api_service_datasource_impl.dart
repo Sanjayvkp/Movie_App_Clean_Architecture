@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movie_application/core/constants/api_constants/api_utils.dart';
 
@@ -5,6 +7,7 @@ import 'package:movie_application/features/movie_feature2/data/datasources/api_s
 import 'package:movie_application/features/movie_feature2/data/models/firestore_model.dart';
 import 'package:movie_application/features/movie_feature2/data/models/movie_model.dart';
 import 'package:dio/dio.dart';
+import 'package:movie_application/features/movie_feature2/data/models/trailer_model.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/trailer_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -17,6 +20,7 @@ class ApiServiceDatasourceImpl implements ApiServicesDatasource {
   static const popularLink = ApiUrls.popularURL;
   static const searchLink = ApiUrls.searchUrl;
   static const token = ApiUrls.token;
+  static const trailerLink = ApiUrls.trailerLink;
   @override
   Future<MovieModel> getMovies() async {
     dio.options.headers['Authorization'] = 'Bearer $token';
@@ -47,16 +51,21 @@ class ApiServiceDatasourceImpl implements ApiServicesDatasource {
     return MovieModel.fromJson(response.data);
   }
 
-  // @override
-  // Future<List<TrailerEntity>> getTrailer(movieId) async {
-  //   final Response response = await dio.get(
-  //     '$link/movie/$movieId/videos',
-  //     queryParameters: {
-  //       'api_key': token,
-  //     },
-  //   );
-  //   return response;
-  // }
+  @override
+  Future<TrailerModel> getTrailer(movieId) async {
+    dio.options.headers['Authorization'] = 'Bearer $token';
+    log(movieId);
+    // final Response response = await dio.get('$trailerLink/$movieId/videos');
+    final Response response = await dio.get('$trailerLink/$movieId/videos');
+
+    log(response.statusCode.toString());
+    return TrailerModel.fromJson(response.data);
+
+    //   if (response.statusCode == 200) {
+    //     return TrailerModel.fromJson(response.data);
+    //   }
+    // }
+  }
 }
 
 @riverpod

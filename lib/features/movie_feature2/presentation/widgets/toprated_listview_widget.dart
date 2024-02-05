@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +18,15 @@ class ListViewTopRatedWidget extends ConsumerWidget {
       scrollDirection: Axis.horizontal,
       itemCount: 10,
       itemBuilder: (context, index) {
+        final posterPathFile = File(value[index].poster_path);
+        late final ImageProvider image;
+        if (posterPathFile.existsSync()) {
+          image = FileImage(posterPathFile);
+        } else {
+          image = NetworkImage(
+            ApiUrls.linksimage + value[index].poster_path,
+          );
+        }
         return Row(
           children: [
             SizedBox(
@@ -29,10 +40,7 @@ class ListViewTopRatedWidget extends ConsumerWidget {
                 width: MediaQuery.sizeOf(context).width / 3,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            ApiUrls.linksimage + value[index].poster_path),
-                        fit: BoxFit.fill)),
+                    image: DecorationImage(image: image, fit: BoxFit.fill)),
               ),
             ),
           ],

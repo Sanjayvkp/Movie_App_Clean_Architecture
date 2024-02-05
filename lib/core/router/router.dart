@@ -12,8 +12,10 @@ import 'package:movie_application/features/movie_feature2/presentation/pages/pro
 import 'package:movie_application/features/movie_feature2/presentation/pages/watchlist_page.dart';
 import 'package:movie_application/features/movie_feature2/presentation/pages/youtube_trailer_page.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/pageview_widget.dart';
+import 'package:movie_application/main.dart';
 
 final router = GoRouter(
+  navigatorKey: MyApp.navigatorKey,
   initialLocation: PageViewWidget.routePath,
   routes: [
     GoRoute(
@@ -64,7 +66,6 @@ final router = GoRouter(
       builder: (context, state) {
         return OverviewPage(
           entity: state.extra as MovieEntity,
-          
         );
       },
     ),

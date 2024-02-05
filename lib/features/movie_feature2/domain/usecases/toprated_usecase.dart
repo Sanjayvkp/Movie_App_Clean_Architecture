@@ -29,11 +29,11 @@ final class TopRatedUseCase {
     try {
       if (result) {
         final datafromApi = await repository.getTopRated();
-        localrepo.clearAllMovies();
-        localrepo.addAllmovies(datafromApi);
+        localrepo.clearTopRatedMovies();
+        localrepo.addTopRatedmovies(datafromApi);
         return datafromApi;
       } else {
-        final datafromlocal = localrepo.getAllmovies();
+        final datafromlocal = localrepo.getTopRatedMovies();
         return datafromlocal;
       }
     } catch (e) {

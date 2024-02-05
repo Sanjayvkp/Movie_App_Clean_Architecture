@@ -98,14 +98,21 @@ class MovieRepositoryImpl implements MovieRepository {
     return results;
   }
 
-  // @override
-  // Future<List<TrailerEntity>> getMovieTrailers(int movieId) {
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // Future<List<TrailerEntity>> getMovieTrailers(int movieId) async{
-  // }
+  @override
+  Future<List<TrailerEntity>> getTrailer(String id) async {
+    final data = await datasource.getTrailer(id);
+    late List<TrailerEntity> results;
+    results = [
+      for (final result in data.results)
+        TrailerEntity(
+          id: result.id,
+          name: result.name,
+          key: result.key,
+          type: result.type,
+        ),
+    ];
+    return results;
+  }
 }
 
 @riverpod

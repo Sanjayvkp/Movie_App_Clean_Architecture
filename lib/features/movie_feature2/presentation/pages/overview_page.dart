@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -27,7 +29,7 @@ class OverviewPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          entity.title,
+          entity.originalTitle,
           style: TextStyle(color: theme.colors.secondary),
         ),
         backgroundColor: theme.colors.primary,
@@ -43,11 +45,22 @@ class OverviewPage extends ConsumerWidget {
             Stack(
               children: [
                 Center(
-                  child: ContainerWidget(
-                    image: ApiUrls.linksimage + entity.poster_path,
-                    width: MediaQuery.sizeOf(context).width / 1.1,
-                    height: MediaQuery.sizeOf(context).height / 2.01,
-                  ),
+                  child: Builder(builder: (context) {
+                    final posterPathFile = File(entity.poster_path);
+                    late final ImageProvider image;
+                    if (posterPathFile.existsSync()) {
+                      image = FileImage(posterPathFile);
+                    } else {
+                      image = NetworkImage(
+                        ApiUrls.linksimage + entity.poster_path,
+                      );
+                    }
+                    return ContainerWidget(
+                      image: image,
+                      width: MediaQuery.sizeOf(context).width / 1.10,
+                      height: MediaQuery.sizeOf(context).height / 1.85,
+                    );
+                  }),
                 ),
                 Positioned(
                     left: 30,
@@ -101,7 +114,7 @@ class OverviewPage extends ConsumerWidget {
               ],
             ),
             SizedBox(
-              height: theme.spaces.space_400,
+              height: theme.spaces.space_300,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -116,6 +129,7 @@ class OverviewPage extends ConsumerWidget {
               ),
             ),
             SynopsisWidget(
+                movie: entity,
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
@@ -139,28 +153,25 @@ class OverviewPage extends ConsumerWidget {
                 rating: entity.voteAverage.toStringAsFixed(1),
                 overview: entity.overview,
                 releaseyear: entity.releaseDate.year.toString()),
-            SizedBox(
-              height: 500,
-              child: StreamBuilder(
-                stream: ref
-                    .watch(movieHomeProvider.notifier)
-                    .getReview(entity.id.toString()),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return SizedBox(
-                        child: CommentListViewWidget(entity: snapshot.data!));
-                  } else if (snapshot.data == null) {
-                    return const Center(
-                      child: Text(
-                        'No comments',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    );
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                },
-              ),
+            StreamBuilder(
+              stream: ref
+                  .watch(movieHomeProvider.notifier)
+                  .getReview(entity.id.toString()),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return SizedBox(
+                      child: CommentListViewWidget(entity: snapshot.data!));
+                } else if (snapshot.data == null) {
+                  return const Center(
+                    child: Text(
+                      'No comments',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  );
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              },
             )
           ],
         ),

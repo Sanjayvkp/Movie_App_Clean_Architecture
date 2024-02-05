@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ContainerWidget extends ConsumerWidget {
-  final String image;
+  final ImageProvider image;
   final double width;
   final double height;
   const ContainerWidget(
@@ -18,7 +18,7 @@ class ContainerWidget extends ConsumerWidget {
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        image: DecorationImage(image: NetworkImage(image), fit: BoxFit.fill),
+        image: DecorationImage(image: image, fit: BoxFit.fill),
       ),
     );
   }

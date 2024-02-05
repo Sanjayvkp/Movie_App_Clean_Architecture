@@ -107,11 +107,17 @@ class HomePage extends ConsumerWidget {
               },
               error: (error, stackTrace) {
                 return Center(
-                  child: TextButton(
-                      onPressed: () {
-                        ref.invalidate(movieHomeProvider);
-                      },
-                      child: const Text('Retry')),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(error.toString()),
+                      TextButton(
+                          onPressed: () {
+                            ref.invalidate(movieHomeProvider);
+                          },
+                          child: const Text('Retry')),
+                    ],
+                  ),
                 );
               },
               loading: () {

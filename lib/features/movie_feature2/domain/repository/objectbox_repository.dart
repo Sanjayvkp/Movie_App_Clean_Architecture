@@ -5,4 +5,10 @@ abstract class ObjectBoxMovieRepository {
   void addAllmovies(List<MovieEntity> entity);
   void clearAllMovies();
   List<MovieEntity> getAllmovies();
+  void addTopRatedmovies(List<MovieEntity> entity);
+  void clearTopRatedMovies();
+  List<MovieEntity> getTopRatedMovies();
+  void addPopularMovies(List<MovieEntity> entity);
+  void clearPopularMovies();
+  List<MovieEntity> getPopularMovies();
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -27,6 +29,16 @@ class ListviewWidget extends ConsumerWidget {
       scrollDirection: Axis.horizontal,
       itemCount: itemcount,
       itemBuilder: (context, index) {
+        final backDropPathFile = File(value[index].backdrop_path);
+        late final ImageProvider image;
+        if (backDropPathFile.existsSync()) {
+          image = FileImage(backDropPathFile);
+        } else {
+          image = NetworkImage(
+            images + value[index].backdrop_path,
+          );
+        }
+
         return Row(
           children: [
             SizedBox(
@@ -42,11 +54,7 @@ class ListviewWidget extends ConsumerWidget {
                     width: width,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                              images + value[index].backdrop_path,
-                            ),
-                            fit: BoxFit.fill)),
+                        image: DecorationImage(image: image, fit: BoxFit.fill)),
                   ),
                   Positioned(
                     bottom: 0,

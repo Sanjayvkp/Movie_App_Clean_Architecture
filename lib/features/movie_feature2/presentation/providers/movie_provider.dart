@@ -8,6 +8,7 @@ import 'package:movie_application/features/movie_feature2/data/repository/movie_
 import 'package:movie_application/features/movie_feature2/data/repository/objectbox_repository_impl.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/movie_entity.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/review_entity.dart';
+import 'package:movie_application/features/movie_feature2/domain/entities/trailer_entity.dart';
 import 'package:movie_application/features/movie_feature2/domain/usecases/add_review_usecase.dart';
 import 'package:movie_application/features/movie_feature2/domain/usecases/delete_review_usecase.dart';
 import 'package:movie_application/features/movie_feature2/domain/usecases/firebase_delete_usecase.dart';
@@ -18,7 +19,9 @@ import 'package:movie_application/features/movie_feature2/domain/usecases/movie_
 import 'package:movie_application/features/movie_feature2/domain/usecases/popular_usecase.dart';
 import 'package:movie_application/features/movie_feature2/domain/usecases/search_usecase.dart';
 import 'package:movie_application/features/movie_feature2/domain/usecases/toprated_usecase.dart';
+import 'package:movie_application/features/movie_feature2/domain/usecases/trailer_usecase.dart';
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider_state.dart';
+import 'package:movie_application/main.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'movie_provider.g.dart';
@@ -91,6 +94,11 @@ class MovieHome extends _$MovieHome {
   Stream<List<ReviewEntity>> getReview(String id) {
     final repository = ref.watch(fireBaseRepositoryProvider);
     return GetReviewUseCase(repositorys: repository)(id);
+  }
+
+  Future<List<TrailerEntity>> getTrailer(String id) async {
+    final repository = ref.watch(movieRepositoryProvider);
+    return TrailerUsecase(repository: repository)(id);
   }
 }
 

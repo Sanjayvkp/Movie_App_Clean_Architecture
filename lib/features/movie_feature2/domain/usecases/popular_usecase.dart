@@ -29,11 +29,11 @@ final class PopularUseCase {
     try {
       if (result) {
         final datafromApi = await repository.getPopular();
-        localrepo.clearAllMovies();
-        localrepo.addAllmovies(datafromApi);
+        localrepo.clearPopularMovies();
+        localrepo.addPopularMovies(datafromApi);
         return datafromApi;
       } else {
-        final datafromlocal = localrepo.getAllmovies();
+        final datafromlocal = localrepo.getPopularMovies();
         return datafromlocal;
       }
     } catch (e) {
