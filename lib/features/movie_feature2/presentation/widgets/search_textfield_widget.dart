@@ -4,11 +4,11 @@ import 'package:movie_application/core/theme/app_theme.dart';
 import 'package:movie_application/core/theme/color_palatte.dart';
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
 
-class TextFieldHomeWidget extends ConsumerWidget {
+class SearchTextFieldWidget extends ConsumerWidget {
   final String labeltext;
   final Icon icondata;
 
-  const TextFieldHomeWidget({
+  const SearchTextFieldWidget({
     super.key,
     required this.labeltext,
     required this.icondata,
@@ -27,6 +27,16 @@ class TextFieldHomeWidget extends ConsumerWidget {
                 horizontal: AppTheme.of(context).spaces.space_400),
             hintText: labeltext,
             prefixIcon: icondata,
+            suffixIcon: IconButton(
+                onPressed: () => ref
+                    .read(movieHomeProvider.notifier)
+                    .searchMovies(
+                        ref
+                            .read(movieHomeProvider.notifier)
+                            .searchController
+                            .text,
+                        context),
+                icon: const Icon(Icons.send)),
             prefixIconColor: AppColorPalette.black.withOpacity(.50),
             hintStyle: TextStyle(color: AppColorPalette.black.withOpacity(.50)),
             fillColor: AppTheme.of(context).colors.primary.withOpacity(.50),

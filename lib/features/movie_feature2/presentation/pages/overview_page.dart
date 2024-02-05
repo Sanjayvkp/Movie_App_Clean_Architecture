@@ -9,6 +9,7 @@ import 'package:movie_application/features/movie_feature2/domain/entities/movie_
 import 'package:movie_application/features/movie_feature2/domain/entities/review_entity.dart';
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/container_widget.dart';
+import 'package:movie_application/features/movie_feature2/presentation/widgets/review_listview_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/show_model_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/synopsis_widget.dart';
 
@@ -26,7 +27,7 @@ class OverviewPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          entity.originalTitle,
+          entity.title,
           style: TextStyle(color: theme.colors.secondary),
         ),
         backgroundColor: theme.colors.primary,
@@ -36,17 +37,20 @@ class OverviewPage extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(
+              height: 10,
+            ),
             Stack(
               children: [
                 Center(
                   child: ContainerWidget(
                     image: ApiUrls.linksimage + entity.poster_path,
-                    width: MediaQuery.sizeOf(context).width / 1.3,
+                    width: MediaQuery.sizeOf(context).width / 1.1,
                     height: MediaQuery.sizeOf(context).height / 2.01,
                   ),
                 ),
                 Positioned(
-                    left: 60,
+                    left: 30,
                     top: theme.spaces.space_200,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
@@ -73,7 +77,7 @@ class OverviewPage extends ConsumerWidget {
                       ),
                     )),
                 Positioned(
-                    right: 60,
+                    right: 30,
                     top: 8,
                     child: FloatingActionButton.small(
                       backgroundColor: theme.colors.secondary,
@@ -96,6 +100,21 @@ class OverviewPage extends ConsumerWidget {
                     ))
               ],
             ),
+            SizedBox(
+              height: theme.spaces.space_400,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  Text(
+                    'Synopsis:',
+                    style: theme.typography.h500
+                        .copyWith(color: theme.colors.secondary),
+                  ),
+                ],
+              ),
+            ),
             SynopsisWidget(
                 onPressed: () {
                   showModalBottomSheet(
@@ -103,8 +122,12 @@ class OverviewPage extends ConsumerWidget {
                     builder: (context) {
                       return ShowModelWidget(
                           onPressed: () {
-                            data.addReview(ReviewEntity(
-                                review: data.reviewController.text));
+                            data.addReview(
+                                ReviewEntity(
+                                    movieId: entity.id.toString(),
+                                    review: data.reviewController.text,
+                                    id: entity.id.toString()),
+                                entity.id.toString());
                             data.reviewController.clear();
                             context.pop();
                           },
@@ -115,7 +138,30 @@ class OverviewPage extends ConsumerWidget {
                 language: entity.originalLanguage,
                 rating: entity.voteAverage.toStringAsFixed(1),
                 overview: entity.overview,
-                releaseyear: entity.releaseDate.year.toString())
+                releaseyear: entity.releaseDate.year.toString()),
+            SizedBox(
+              height: 500,
+              child: StreamBuilder(
+                stream: ref
+                    .watch(movieHomeProvider.notifier)
+                    .getReview(entity.id.toString()),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return SizedBox(
+                        child: CommentListViewWidget(entity: snapshot.data!));
+                  } else if (snapshot.data == null) {
+                    return const Center(
+                      child: Text(
+                        'No comments',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                },
+              ),
+            )
           ],
         ),
       ),

@@ -19,6 +19,7 @@ import 'package:movie_application/features/movie_feature1/presentation/pages/log
 import 'package:movie_application/features/movie_feature1/presentation/pages/otp_verified_page.dart';
 import 'package:movie_application/features/movie_feature1/presentation/providers/auth_state.dart';
 import 'package:movie_application/features/movie_feature2/presentation/pages/homepage.dart';
+import 'package:movie_application/features/movie_feature2/presentation/widgets/pageview_widget.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_provider.g.dart';
@@ -46,7 +47,7 @@ class Movie extends _$Movie {
     try {
       await SignUpUseCase(repository: repository)(email, password);
       Future.sync(() => verifyEmail(context));
-      Future.sync(() => context.go(HomePage.routePath));
+      Future.sync(() => context.go(PageViewWidget.routePath));
     } on SignUpException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
     } on BaseException catch (e) {
@@ -73,7 +74,7 @@ class Movie extends _$Movie {
   Future<void> signinWithGoogle(BuildContext context) async {
     try {
       await GoogleSignInUsecase(repository: repository)();
-      Future.sync(() => context.go(HomePage.routePath));
+      Future.sync(() => context.go(PageViewWidget.routePath));
     } on BaseException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
     }
@@ -83,7 +84,7 @@ class Movie extends _$Movie {
       BuildContext context, String email, String password) async {
     try {
       await SignInUseCase(repository: repository)(email, password);
-      Future.sync(() => context.go(HomePage.routePath));
+      Future.sync(() => context.go(PageViewWidget.routePath));
     } on SigninException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
     } on BaseException catch (e) {

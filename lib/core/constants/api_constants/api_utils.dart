@@ -7,6 +7,7 @@ class ApiUrls {
       'https://api.themoviedb.org/3/movie/top_rated';
   static const String upcomingUrl =
       'https://api.themoviedb.org/3/movie/upcoming';
+  static const String searchUrl = "https://api.themoviedb.org/3/search/movie";
   static const token =
       'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0Y2E0MjZmODg0YTc4ZTRiNjUxNzMyNDI3ZTJkMTQ3MCIsInN1YiI6IjY1ODE3Zjg4ZGY4NmE4MDhkYWU4Yjc3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9HK2oLiwQh-Ai0OM46T8mYPes3Ru6fGp6G4rB9P4iMM';
 }

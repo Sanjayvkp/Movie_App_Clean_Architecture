@@ -10,6 +10,9 @@ class FireStoreReviewModel with _$FireStoreReviewModel {
   factory FireStoreReviewModel(
       {
         required String review,
+        required String id,
+        // required DateTime time,
+        // required String user,
       }) = _FireStoreReviewModel;
 
   factory FireStoreReviewModel.fromJson(Map<String, dynamic> json) =>

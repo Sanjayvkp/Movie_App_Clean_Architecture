@@ -20,7 +20,7 @@ class PlayButtonWidget extends ConsumerWidget {
         style: ElevatedButton.styleFrom(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            minimumSize: Size(MediaQuery.sizeOf(context).width / 1.30,
+            minimumSize: Size(MediaQuery.sizeOf(context).width / 1.1,
                 MediaQuery.sizeOf(context).height / 16),
             backgroundColor: bgcolor),
         onPressed: onPressed,

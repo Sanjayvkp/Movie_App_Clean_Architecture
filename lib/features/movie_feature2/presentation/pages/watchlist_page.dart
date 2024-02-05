@@ -32,7 +32,7 @@ class WatchListPage extends ConsumerWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return VerticalListViewWidget(
-                  height: 200,
+                  height: 180,
                   width: MediaQuery.sizeOf(context).width / 1.1,
                   itemcount: snapshot.data!.length,
                   value: snapshot.data!);

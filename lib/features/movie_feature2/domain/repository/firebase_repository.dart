@@ -3,7 +3,9 @@ import 'package:movie_application/features/movie_feature2/domain/entities/review
 
 abstract class FireBaseRepository {
   Future<void> addtoFireStore(MovieEntity entity);
-  Future<void> addReview(ReviewEntity entity);
+  Future<void> addReview(ReviewEntity entity, String id);
   Future<void> deleteFromFirestore(String id);
   Stream<List<MovieEntity>> getFromFirestore();
+  Stream<List<ReviewEntity>> getReview(String id);
+  Future<void> deleteReview(String id);
 }

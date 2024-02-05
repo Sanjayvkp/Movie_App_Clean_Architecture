@@ -61,9 +61,32 @@ class FireBaseRepostoryImpl implements FireBaseRepository {
   }
 
   @override
-  Future<void> addReview(ReviewEntity entity) async {
-    final model = FireStoreReviewModel(review: entity.review);
-    await reviewdatasource.addReview(model);
+  Future<void> addReview(ReviewEntity entity, String id) async {
+    final model = FireStoreReviewModel(
+      review: entity.review,
+      id: entity.id,
+    );
+    await reviewdatasource.addReview(model, id);
+  }
+
+  @override
+  Stream<List<ReviewEntity>> getReview(String id) async* {
+    final querysnapshot = reviewdatasource.getReview(id);
+    await for (var snapshot in querysnapshot) {
+      final docs = snapshot.docs;
+      yield [
+        for (var model in docs)
+          ReviewEntity(
+              review: model.data().review,
+              id: model.data().id,
+              movieId: model.data().id)
+      ];
+    }
+  }
+
+  @override
+  Future<void> deleteReview(String id) async {
+    await reviewdatasource.deleteReview(id);
   }
 }
 

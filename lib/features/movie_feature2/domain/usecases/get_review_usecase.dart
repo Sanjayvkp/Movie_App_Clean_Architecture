@@ -1,15 +1,16 @@
 import 'package:movie_application/core/exception/base_exception.dart';
+import 'package:movie_application/features/movie_feature2/domain/entities/movie_entity.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/review_entity.dart';
 import 'package:movie_application/features/movie_feature2/domain/repository/firebase_repository.dart';
 
-final class AddReviewUsecase {
+final class GetReviewUseCase {
   final FireBaseRepository repositorys;
-  AddReviewUsecase({required this.repositorys});
-  Future<void> call(ReviewEntity entity, String id) async {
+  GetReviewUseCase({required this.repositorys});
+  Stream<List<ReviewEntity>> call(String id) {
     try {
-      return await repositorys.addReview(entity, id);
+      return repositorys.getReview(id);
     } catch (e) {
-      throw BaseException('Cannot add');
+      throw BaseException('Cannot add to watchlist');
     }
   }
 }

@@ -5,6 +5,7 @@ import 'package:movie_application/features/movie_feature2/data/datasources/api_s
 import 'package:movie_application/features/movie_feature2/data/models/firestore_model.dart';
 import 'package:movie_application/features/movie_feature2/data/models/movie_model.dart';
 import 'package:dio/dio.dart';
+import 'package:movie_application/features/movie_feature2/domain/entities/trailer_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'api_service_datasource_impl.g.dart';
@@ -14,6 +15,7 @@ class ApiServiceDatasourceImpl implements ApiServicesDatasource {
   static const link = ApiUrls.movieURL;
   static const topRatedlink = ApiUrls.topRatedURL;
   static const popularLink = ApiUrls.popularURL;
+  static const searchLink = ApiUrls.searchUrl;
   static const token = ApiUrls.token;
   @override
   Future<MovieModel> getMovies() async {
@@ -36,18 +38,25 @@ class ApiServiceDatasourceImpl implements ApiServicesDatasource {
     return MovieModel.fromJson(response.data);
   }
 
-//   @override
-//   Future<List<TrailerEntity>> getTrailer(movieId) async {
-//     try{
-//  final Response response = await dio.get(
-//         '$link/movie/$movieId/videos',
-//         queryParameters: {
-//           'api_key': token,
-//         },
-//       );
-//     }
+  @override
+  Future<MovieModel> searchMovie(String text) async {
+    dio.options.headers['Authorization'] = 'Bearer $token';
+    Response response = await dio.get(searchLink, queryParameters: {
+      'query': text,
+    });
+    return MovieModel.fromJson(response.data);
+  }
 
-//   }
+  // @override
+  // Future<List<TrailerEntity>> getTrailer(movieId) async {
+  //   final Response response = await dio.get(
+  //     '$link/movie/$movieId/videos',
+  //     queryParameters: {
+  //       'api_key': token,
+  //     },
+  //   );
+  //   return response;
+  // }
 }
 
 @riverpod

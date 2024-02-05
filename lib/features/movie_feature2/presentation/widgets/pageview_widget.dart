@@ -19,13 +19,13 @@ class PageViewWidget extends ConsumerWidget {
           onPageChanged: (value) {
             ref.read(pageProvider.notifier).state = value;
           },
-          children: [
+          children: const [
             HomePage(),
             SearchPage(),
             WatchListPage(),
             ProfilePage(),
           ]),
-      bottomNavigationBar: BottomNavigationWidget(),
+      bottomNavigationBar: const BottomNavigationWidget(),
     );
   }
 }

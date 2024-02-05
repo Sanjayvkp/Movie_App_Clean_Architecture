@@ -32,6 +32,9 @@ class SynopsisWidget extends ConsumerWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          // SizedBox(
+          //   height: 40,
+          // ),
           SizedBox(
             height: MediaQuery.sizeOf(context).height / 9,
             width: MediaQuery.sizeOf(context).width / 1.1,
@@ -50,55 +53,60 @@ class SynopsisWidget extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CliprrectWidget(
-                  ratingtext: theme.colors.secondary,
+                  ratingtext: theme.colors.primary,
                   height: theme.spaces.space_500,
                   text: HomePageConstants().year + releaseyear,
                   width: theme.spaces.space_250 * 9,
-                  color: AppTheme.of(context)
-                      .colors
-                      .textSubtlest
-                      .withOpacity(.30)),
+                  color:
+                      AppTheme.of(context).colors.secondary.withOpacity(.70)),
               CliprrectWidget(
-                  ratingtext: theme.colors.secondary,
+                  ratingtext: theme.colors.primary,
                   height: theme.spaces.space_500,
                   text: language,
                   width: theme.spaces.space_500 * 2,
-                  color: AppTheme.of(context)
-                      .colors
-                      .textSubtlest
-                      .withOpacity(.30)),
+                  color:
+                      AppTheme.of(context).colors.secondary.withOpacity(.70)),
               CliprrectWidget(
-                  ratingtext: theme.colors.secondary,
+                  ratingtext: theme.colors.primary,
                   height: theme.spaces.space_500,
                   text: '⭐$rating',
                   width: theme.spaces.space_500 * 2,
-                  color: AppTheme.of(context)
-                      .colors
-                      .textSubtlest
-                      .withOpacity(.30)),
+                  color:
+                      AppTheme.of(context).colors.secondary.withOpacity(.70)),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              PlayButtonWidget(
-                btntxt: HomePageConstants().playtxt,
-                bgcolor: theme.colors.backgroundDanger,
-                textcolor: theme.colors.secondary,
-                onPressed: () {
-                  context.push(YoutubePlayerPage.routePath);
-                },
-              ),
-              FloatingActionButton.small(
-                  backgroundColor: theme.colors.textSubtlest,
-                  elevation: 0,
+          SizedBox(
+            height: theme.spaces.space_100,
+          ),
+          PlayButtonWidget(
+            btntxt: HomePageConstants().playtxt,
+            bgcolor: theme.colors.backgroundDanger,
+            textcolor: theme.colors.primary,
+            onPressed: () {
+              context.push(YoutubePlayerPage.routePath);
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Comments',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                ),
+                TextButton(
                   onPressed: onPressed,
-                  child: const Icon(
-                    Icons.note_alt_outlined,
-                    size: 25,
-                  )),
-            ],
-          )
+                  child: const Text(
+                    'Post a comment',
+                    style: TextStyle(
+                        color: Colors.grey,
+                        decoration: TextDecoration.underline),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

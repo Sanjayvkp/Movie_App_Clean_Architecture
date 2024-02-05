@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,8 +18,19 @@ class CaroselWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CarouselSlider.builder(
-      itemCount: itemcount,
+      itemCount: list.length,
       itemBuilder: (context, index, realIndex) {
+        final posterPathFile = File(list[index].poster_path);
+
+        late final ImageProvider image;
+        if (posterPathFile.existsSync()) {
+          image = FileImage(posterPathFile);
+        } else {
+          image = NetworkImage(
+            images + list[index].poster_path,
+          );
+        }
+
         return InkWell(
           onTap: () => context.push(OverviewPage.routePath, extra: list[index]),
           child: Container(
@@ -25,11 +38,7 @@ class CaroselWidget extends ConsumerWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: AppTheme.of(context).colors.textSubtle,
-                image: DecorationImage(
-                    image: NetworkImage(
-                      images + list[index].poster_path,
-                    ),
-                    fit: BoxFit.fill)),
+                image: DecorationImage(image: image, fit: BoxFit.fill)),
           ),
         );
       },
