@@ -15,7 +15,7 @@ class BottomNavigationWidget extends ConsumerWidget {
         ref.read(movieHomeProvider.notifier).pageController.jumpToPage(value);
       },
       elevation: 0,
-      backgroundColor: AppColorPalette.white.withOpacity(.50),
+      backgroundColor: AppTheme.of(context).colors.primary,
       selectedItemColor: AppTheme.of(context).colors.secondary,
       unselectedItemColor: AppTheme.of(context).colors.textSubtlest,
       iconSize: AppTheme.of(context).spaces.space_300,

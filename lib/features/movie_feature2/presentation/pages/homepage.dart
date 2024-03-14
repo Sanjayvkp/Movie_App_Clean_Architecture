@@ -23,6 +23,7 @@ class HomePage extends ConsumerWidget {
     final theme = AppTheme.of(context);
     final constants = HomePageConstants();
     return Scaffold(
+      backgroundColor: theme.colors.primary,
       extendBody: true,
       appBar: AppBar(
         toolbarHeight: 80,
@@ -36,7 +37,6 @@ class HomePage extends ConsumerWidget {
               },
               icon: const Icon(
                 Icons.menu,
-                color: Colors.black,
               )),
         ),
         title: Text(
@@ -73,15 +73,17 @@ class HomePage extends ConsumerWidget {
                       SizedBox(
                         height: theme.spaces.space_100,
                       ),
-                      SizedBox(
-                          height: MediaQuery.sizeOf(context).height / 6,
-                          width: MediaQuery.sizeOf(context).width,
-                          child: ListviewWidget(
-                            height: MediaQuery.sizeOf(context).height / 5,
-                            width: MediaQuery.sizeOf(context).width / 1.3,
-                            value: data.getPopular,
-                            itemcount: 10,
-                          )),
+                      Center(
+                        child: SizedBox(
+                            height: MediaQuery.sizeOf(context).height / 4,
+                            width: MediaQuery.sizeOf(context).width,
+                            child: ListviewWidget(
+                              // height: MediaQuery.sizeOf(context).height / 4,
+                              width: MediaQuery.sizeOf(context).width / 1.1,
+                              value: data.getPopular,
+                              itemcount: 10,
+                            )),
+                      ),
                       SizedBox(
                         height: AppTheme.of(context).spaces.space_200,
                       ),

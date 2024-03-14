@@ -4,10 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:movie_application/core/constants/api_constants/api_utils.dart';
 import 'package:movie_application/core/constants/homepage/home_page_constants.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
+import 'package:movie_application/features/movie_feature2/domain/entities/movie_entity.dart';
 import 'package:movie_application/features/movie_feature2/presentation/pages/gridview_page.dart';
 import 'package:movie_application/features/movie_feature2/presentation/pages/overview_page.dart';
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/heading_widget.dart';
+import 'package:movie_application/features/movie_feature2/presentation/widgets/listview_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/search_textfield_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/toprated_listview_widget.dart';
 
@@ -17,6 +19,7 @@ class SearchPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      backgroundColor: AppTheme.of(context).colors.primary,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -26,7 +29,10 @@ class SearchPage extends ConsumerWidget {
             Center(
               child: SearchTextFieldWidget(
                   labeltext: HomePageConstants().searchText,
-                  icondata: const Icon(Icons.search)),
+                  icondata: Icon(
+                    Icons.search,
+                    color: AppTheme.of(context).colors.secondary,
+                  )),
             ),
             Builder(builder: (context) {
               return ref.watch(movieHomeProvider).when(
@@ -41,35 +47,52 @@ class SearchPage extends ConsumerWidget {
                             children: [
                               Text(
                                 'Top Suggestions',
-                                style: AppTheme.of(context).typography.h600,
+                                style: AppTheme.of(context)
+                                    .typography
+                                    .h600
+                                    .copyWith(
+                                        color: AppTheme.of(context)
+                                            .colors
+                                            .secondary
+                                            .withOpacity(.60)),
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 200,
-                          child: ListViewTopRatedWidget(
-                            value: data.getTopRated,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: SizedBox(
+                            height: MediaQuery.sizeOf(context).height / 1.1,
+                            child: GridView.builder(
+                              itemCount: data.getMovies.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      mainAxisExtent: 150,
+                                      crossAxisSpacing: 10,
+                                      mainAxisSpacing: 10,
+                                      crossAxisCount: 3),
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  onTap: () {
+                                    context.push(OverviewPage.routePath,
+                                        extra: data.getMovies[index]);
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                              ApiUrls.linksimage +
+                                                  data.getMovies[index]
+                                                      .poster_path,
+                                            ),
+                                            fit: BoxFit.fill)),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SizedBox(
-                          height: 200,
-                          child: ListViewTopRatedWidget(
-                            value: data.getPopular,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SizedBox(
-                          height: 200,
-                          child: ListViewTopRatedWidget(
-                            value: data.getMovies,
-                          ),
-                        )
                       ],
                     );
                   } else {

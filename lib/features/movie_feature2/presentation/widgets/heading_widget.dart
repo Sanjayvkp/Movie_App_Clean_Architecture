@@ -20,7 +20,8 @@ class HeadingWidget extends ConsumerWidget {
         children: [
           Text(
             text,
-            style: theme.typography.h600,
+            style:
+                theme.typography.h600.copyWith(color: theme.colors.secondary),
           ),
           TextButtonWidget(
             text: constants.seemore,

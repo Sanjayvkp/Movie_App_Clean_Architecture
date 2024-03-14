@@ -30,7 +30,7 @@ class ListViewTopRatedWidget extends ConsumerWidget {
         return Row(
           children: [
             SizedBox(
-              width: AppTheme.of(context).spaces.space_250,
+              width: AppTheme.of(context).spaces.space_200,
             ),
             InkWell(
               onTap: () {

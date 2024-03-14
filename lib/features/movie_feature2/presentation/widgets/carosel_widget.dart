@@ -43,7 +43,7 @@ class CaroselWidget extends ConsumerWidget {
         );
       },
       options: CarouselOptions(
-        height: 270,
+        height: MediaQuery.sizeOf(context).height / 3.3,
         viewportFraction: 0.5,
         enableInfiniteScroll: true,
         reverse: false,

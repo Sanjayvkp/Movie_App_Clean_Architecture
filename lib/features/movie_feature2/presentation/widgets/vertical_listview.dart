@@ -45,14 +45,13 @@ class VerticalListViewWidget extends ConsumerWidget {
                     height: height,
                     width: width,
                     decoration: BoxDecoration(
-                        boxShadow: const [
+                        boxShadow: [
                           BoxShadow(
                               blurRadius: 5,
-                              color: Color.fromARGB(255, 78, 78, 78))
+                              color: AppTheme.of(context).colors.textInverse)
                         ],
-                        color: AppColorPalette.white,
-                        border: Border.all(
-                            color: const Color.fromARGB(255, 255, 251, 251))),
+                        color: theme.colors.primary,
+                        border: Border.all(color: Colors.white)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 10),
@@ -76,8 +75,9 @@ class VerticalListViewWidget extends ConsumerWidget {
                                   width: 180,
                                   child: Text(
                                     value[index].title,
-                                    style: theme.typography.h600.copyWith(
-                                        color: theme.colors.secondary),
+                                    style: theme.typography.h500.copyWith(
+                                        color: theme.colors.secondary
+                                            .withOpacity(.70)),
                                   ),
                                 ),
                               ),

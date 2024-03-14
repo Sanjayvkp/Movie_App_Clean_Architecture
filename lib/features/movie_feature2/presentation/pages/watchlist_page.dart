@@ -13,7 +13,9 @@ class WatchListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      backgroundColor: AppTheme.of(context).colors.primary,
       appBar: AppBar(
+        elevation: 0,
         iconTheme: IconThemeData(color: AppTheme.of(context).colors.secondary),
         title: Text(
           HomePageConstants().watclist,

@@ -27,15 +27,16 @@ class CommentListViewWidget extends ConsumerWidget {
               Container(
                 width: MediaQuery.sizeOf(context).width / 1.07,
                 decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(.3),
+                    color: Colors.grey.withOpacity(.15),
                     borderRadius: BorderRadius.circular(10)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       backgroundColor: Colors.white,
-                      backgroundImage: NetworkImage(
-                          FirebaseAuth.instance.currentUser!.photoURL!),
+                      child: Icon(Icons.person_2_outlined),
+                      // backgroundImage: NetworkImage(
+                      //     FirebaseAuth.instance.currentUser!.photoURL!),
                     ),
                     SizedBox(
                       width: MediaQuery.sizeOf(context).width / 1.6,
@@ -44,8 +45,8 @@ class CommentListViewWidget extends ConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(FirebaseAuth
-                                .instance.currentUser!.displayName!),
+                            // Text(FirebaseAuth
+                            //     .instance.currentUser!.displayName!),
                             Text(
                               entity[index].review,
                               style: const TextStyle(
@@ -53,9 +54,27 @@ class CommentListViewWidget extends ConsumerWidget {
                             ),
                             Divider(
                               thickness: 1.5,
-                              color: Colors.black.withOpacity(.1),
+                              color: Colors.black.withOpacity(.05),
                             ),
-                            const Text('12.30 pm'),
+                            const Row(
+                              children: [
+                                Text('12.30 pm'),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Icon(
+                                  Icons.thumb_up_alt_outlined,
+                                  size: 18,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Icon(
+                                  Icons.thumb_down_alt_outlined,
+                                  size: 18,
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),

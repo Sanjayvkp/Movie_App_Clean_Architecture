@@ -38,7 +38,7 @@ class SearchTextFieldWidget extends ConsumerWidget {
                         context),
                 icon: const Icon(Icons.send)),
             prefixIconColor: AppColorPalette.black.withOpacity(.50),
-            hintStyle: TextStyle(color: AppColorPalette.black.withOpacity(.50)),
+            // hintStyle: TextStyle(color: AppColorPalette.black.withOpacity(.50)),
             fillColor: AppTheme.of(context).colors.primary.withOpacity(.50),
             filled: true,
             border: OutlineInputBorder(

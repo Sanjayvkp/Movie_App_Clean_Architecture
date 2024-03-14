@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,11 +5,8 @@ import 'package:movie_application/core/constants/homepage/home_page_constants.da
 import 'package:movie_application/core/theme/app_theme.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/movie_entity.dart';
 import 'package:movie_application/features/movie_feature2/presentation/pages/youtube_trailer_page.dart';
-import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
-import 'package:movie_application/features/movie_feature2/presentation/providers/trailer_provider.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/cliprrect_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/elevatedbutton_widget.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class SynopsisWidget extends ConsumerWidget {
   final String releaseyear;
@@ -57,78 +52,40 @@ class SynopsisWidget extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CliprrectWidget(
-                  ratingtext: theme.colors.primary,
+                  ratingtext: theme.colors.secondary,
                   height: theme.spaces.space_500,
                   text: HomePageConstants().year + releaseyear,
                   width: theme.spaces.space_250 * 9,
                   color:
-                      AppTheme.of(context).colors.secondary.withOpacity(.50)),
+                      AppTheme.of(context).colors.secondary.withOpacity(.20)),
               CliprrectWidget(
-                  ratingtext: theme.colors.primary,
+                  ratingtext: theme.colors.secondary,
                   height: theme.spaces.space_500,
                   text: language,
                   width: theme.spaces.space_500 * 2,
                   color:
-                      AppTheme.of(context).colors.secondary.withOpacity(.50)),
+                      AppTheme.of(context).colors.secondary.withOpacity(.20)),
               CliprrectWidget(
-                  ratingtext: theme.colors.primary,
+                  ratingtext: theme.colors.secondary,
                   height: theme.spaces.space_500,
                   text: '⭐$rating',
                   width: theme.spaces.space_500 * 2,
                   color:
-                      AppTheme.of(context).colors.secondary.withOpacity(.50)),
+                      AppTheme.of(context).colors.secondary.withOpacity(.20)),
             ],
           ),
-          SizedBox(height: AppTheme.of(context).spaces.space_200),
-          ref.watch(trailerProvider(movie.id.toString())).isRefreshing
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Center(
-                  child: SizedBox(
-                    height: MediaQuery.sizeOf(context).height * .24,
-                    child: Center(
-                      child: switch (
-                          ref.watch(trailerProvider(movie.id.toString()))) {
-                        AsyncData(:final value) => PageView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: value.length,
-                            itemBuilder: (context, index) {
-                              // return Center(
-                              //   child: Text(value[index].name),
-                              // );
-                              return YoutubePlayer(
-                                controller: YoutubePlayerController(
-                                  initialVideoId: value[index].key,
-                                  flags: const YoutubePlayerFlags(
-                                    autoPlay: false,
-                                    mute: false,
-                                    disableDragSeek: true,
-                                  ),
-                                ),
-                                bufferIndicator: const Center(
-                                    child: CircularProgressIndicator()),
-                                showVideoProgressIndicator: true,
-                              );
-                            },
-                          ),
-                        AsyncError(:final error) => Column(
-                            children: [
-                              Text("$error"),
-                              TextButton(
-                                onPressed: () {
-                                  ref.invalidate(
-                                      trailerProvider(movie.id.toString()));
-                                },
-                                child: const Text('Retry'),
-                              )
-                            ],
-                          ),
-                        _ => const CircularProgressIndicator()
-                      },
-                    ),
-                  ),
-                ),
+          SizedBox(
+            height: theme.spaces.space_300,
+          ),
+          PlayButtonWidget(
+              btntxt: 'Watch Trailer',
+              onPressed: () =>
+                  context.push(YoutubePlayerPage.routePath, extra: movie),
+              bgcolor: theme.colors.backgroundDanger,
+              textcolor: theme.colors.primary),
+          SizedBox(
+            height: theme.spaces.space_250,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 2),
             child: Row(

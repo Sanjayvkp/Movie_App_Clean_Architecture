@@ -23,7 +23,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -48,29 +51,19 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDhuGpFCm1vhniVmLyvqjcC90v4ULTbZOs',
-    appId: '1:365823477901:web:cf83cc5c9919a11927fac4',
+    appId: '1:365823477901:web:899b4541d4b415d227fac4',
     messagingSenderId: '365823477901',
     projectId: 'movie-app-ff280',
     authDomain: 'movie-app-ff280.firebaseapp.com',
     storageBucket: 'movie-app-ff280.appspot.com',
+    measurementId: 'G-D33E1GQLW5',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCAI1Ww8DPYEwcrspoCFU9OAg9ZgZcpS7U',
-    appId: '1:365823477901:android:5534dd8b121a9a4a27fac4',
+    appId: '1:365823477901:android:deec8538e7a0fcf027fac4',
     messagingSenderId: '365823477901',
     projectId: 'movie-app-ff280',
     storageBucket: 'movie-app-ff280.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC-qeAhmfPfKkVHqV7DMPuxKSQPm1WeIVw',
-    appId: '1:365823477901:ios:051b4f5a9fd6e69c27fac4',
-    messagingSenderId: '365823477901',
-    projectId: 'movie-app-ff280',
-    storageBucket: 'movie-app-ff280.appspot.com',
-    androidClientId: '365823477901-o9fhisgg74ct3thp652vn3jdvqklk5ru.apps.googleusercontent.com',
-    iosClientId: '365823477901-mtvmbql3aodpbg8ohtcatbs6mb2dsql3.apps.googleusercontent.com',
-    iosBundleId: 'com.example.movieApplication',
   );
 }

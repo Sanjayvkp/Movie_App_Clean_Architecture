@@ -14,14 +14,14 @@ class GridViewPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      backgroundColor: AppTheme.of(context).colors.primary,
       appBar: AppBar(
         title: Text(
           text,
-          style: const TextStyle(color: Colors.black),
         ),
         backgroundColor: AppTheme.of(context).colors.primary,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
+        // iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

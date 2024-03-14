@@ -85,7 +85,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: YoutubePlayerPage.routePath,
-      builder: (context, state) => const YoutubePlayerPage(),
+      builder: (context, state) => YoutubePlayerPage(
+        movie: state.extra as MovieEntity,
+      ),
     ),
     GoRoute(
       path: WatchListPage.routePath,

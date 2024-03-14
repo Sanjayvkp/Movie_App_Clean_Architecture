@@ -17,7 +17,7 @@ class ContainerWidget extends ConsumerWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(20),
         image: DecorationImage(image: image, fit: BoxFit.fill),
       ),
     );

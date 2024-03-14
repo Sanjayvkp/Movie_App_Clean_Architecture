@@ -7,20 +7,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:365823477901:android:5534dd8b121a9a4a27fac4",
+        "mobilesdk_app_id": "1:365823477901:android:deec8538e7a0fcf027fac4",
         "android_client_info": {
-          "package_name": "com.example.movie_application"
+          "package_name": "in.levelx.movie_fliq"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "365823477901-o9fhisgg74ct3thp652vn3jdvqklk5ru.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.movie_application",
-            "certificate_hash": "85bb8bcb41520441a7b187f0928ecb2b63b1defb"
-          }
-        },
         {
           "client_id": "365823477901-bjp6uihc9js52reh81b2u320dt94oahg.apps.googleusercontent.com",
           "client_type": 3
