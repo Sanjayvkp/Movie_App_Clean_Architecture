@@ -3,17 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_application/core/constants/homepage/home_page_constants.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
-import 'package:movie_application/features/movie_feature1/presentation/providers/auth_provider.dart';
 import 'package:movie_application/features/movie_feature2/presentation/pages/gridview_page.dart';
-import 'package:movie_application/features/movie_feature2/presentation/pages/profile_page.dart';
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
-import 'package:movie_application/features/movie_feature2/presentation/widgets/bottomnavigation_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/carosel_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/drawer_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/heading_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/toprated_listview_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/listview_widget.dart';
-import 'package:movie_application/features/movie_feature2/presentation/widgets/textfield_widget.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});

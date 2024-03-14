@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:movie_application/core/exception/base_exception.dart';
 import 'package:movie_application/core/utils/network_utils.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/movie_entity.dart';

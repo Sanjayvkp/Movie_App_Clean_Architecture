@@ -9,14 +9,11 @@ import 'package:movie_application/core/theme/app_theme.dart';
 import 'package:movie_application/core/theme/color_palatte.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/movie_entity.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/review_entity.dart';
-import 'package:movie_application/features/movie_feature2/presentation/pages/youtube_trailer_page.dart';
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/container_widget.dart';
-import 'package:movie_application/features/movie_feature2/presentation/widgets/elevatedbutton_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/review_listview_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/show_model_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/synopsis_widget.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class OverviewPage extends ConsumerWidget {
   const OverviewPage({

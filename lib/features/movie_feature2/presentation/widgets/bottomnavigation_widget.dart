@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
-import 'package:movie_application/core/theme/color_palatte.dart';
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
 
 class BottomNavigationWidget extends ConsumerWidget {

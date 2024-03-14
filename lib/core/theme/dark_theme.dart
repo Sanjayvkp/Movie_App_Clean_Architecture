@@ -12,7 +12,7 @@ final _darkTheme = ThemeData(
   extensions: [
     AppColorExtension(
       primary: Colors.black,
-      secondary: Color.fromARGB(255, 255, 255, 255),
+      secondary: const Color.fromARGB(255, 255, 255, 255),
       text: AppColorPalette.grey900,
       textInverse: const Color.fromARGB(255, 195, 195, 195),
       textSubtle: const Color.fromARGB(255, 0, 0, 0),

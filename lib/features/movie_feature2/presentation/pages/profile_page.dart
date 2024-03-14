@@ -1,12 +1,9 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:movie_application/core/theme/app_theme.dart';
 import 'package:movie_application/core/utils/snackbar_utils.dart';
 
 final imageUrlProvider = StateProvider<String>((ref) {
@@ -40,18 +37,9 @@ class ProfilePage extends ConsumerWidget {
                     'https://i.pinimg.com/474x/2e/e8/48/2ee8488fb54561a1b6c4fc98874a6638.jpg'),
                 fit: BoxFit.cover)),
         child: Center(
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.sizeOf(context).width / 1.1,
             height: MediaQuery.sizeOf(context).height / 1.3,
-            // decoration: BoxDecoration(
-            //     color: AppTheme.of(context).colors.primary,
-            //     // border: Border.all(
-            //     //     width: 1, color: AppTheme.of(context).colors.secondary),
-            //     boxShadow: [
-            //       BoxShadow(
-            //           blurRadius: 2,
-            //           color: AppTheme.of(context).colors.secondary)
-            //     ]),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,

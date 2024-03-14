@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
-import 'package:show_hide_password/show_hide_password.dart';
 
 class TextfieldWidget extends ConsumerWidget {
   final String labeltext;

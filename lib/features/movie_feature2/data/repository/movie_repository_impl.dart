@@ -1,6 +1,5 @@
 import 'package:movie_application/features/movie_feature2/data/datasources/api_service_datasource.dart';
 import 'package:movie_application/features/movie_feature2/data/datasources/api_service_datasource_impl.dart';
-import 'package:movie_application/features/movie_feature2/data/models/firestore_model.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/movie_entity.dart';
 import 'package:movie_application/features/movie_feature2/domain/entities/trailer_entity.dart';
 import 'package:movie_application/features/movie_feature2/domain/repository/movie_repository.dart';

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movie_application/features/movie_feature2/data/datasources/firebase_datasource.dart';
 import 'package:movie_application/features/movie_feature2/data/datasources/firebase_datasource_impl.dart';
 import 'package:movie_application/features/movie_feature2/data/datasources/firebase_review_datasource_impl.dart';

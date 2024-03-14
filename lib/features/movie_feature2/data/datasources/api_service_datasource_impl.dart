@@ -1,14 +1,11 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movie_application/core/constants/api_constants/api_utils.dart';
 
 import 'package:movie_application/features/movie_feature2/data/datasources/api_service_datasource.dart';
-import 'package:movie_application/features/movie_feature2/data/models/firestore_model.dart';
 import 'package:movie_application/features/movie_feature2/data/models/movie_model.dart';
 import 'package:dio/dio.dart';
 import 'package:movie_application/features/movie_feature2/data/models/trailer_model.dart';
-import 'package:movie_application/features/movie_feature2/domain/entities/trailer_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'api_service_datasource_impl.g.dart';

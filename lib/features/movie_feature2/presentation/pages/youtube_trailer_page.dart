@@ -18,7 +18,7 @@ class YoutubePlayerPage extends ConsumerWidget {
         backgroundColor: AppTheme.of(context).colors.secondary,
         title: const Text('Trailer'),
       ),
-      body: ref.watch(trailerProvider(movie!.id.toString())).isRefreshing
+      body: ref.watch(trailerProvider(movie.id.toString())).isRefreshing
           ? const Center(
               child: CircularProgressIndicator(),
             )
@@ -27,7 +27,7 @@ class YoutubePlayerPage extends ConsumerWidget {
                 height: MediaQuery.sizeOf(context).height * .24,
                 child: Center(
                   child: switch (
-                      ref.watch(trailerProvider(movie!.id.toString()))) {
+                      ref.watch(trailerProvider(movie.id.toString()))) {
                     AsyncData(:final value) => PageView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: value.length,
@@ -56,7 +56,7 @@ class YoutubePlayerPage extends ConsumerWidget {
                           TextButton(
                             onPressed: () {
                               ref.invalidate(
-                                  trailerProvider(movie!.id.toString()));
+                                  trailerProvider(movie.id.toString()));
                             },
                             child: const Text('Retry'),
                           )

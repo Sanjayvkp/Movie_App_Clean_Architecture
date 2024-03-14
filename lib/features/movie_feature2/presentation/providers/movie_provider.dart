@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_application/core/exception/base_exception.dart';
 import 'package:movie_application/core/utils/snackbar_utils.dart';
-import 'package:movie_application/features/movie_feature1/data/datasources/firebase_datasource_impl.dart';
 import 'package:movie_application/features/movie_feature2/data/repository/firebase_repository_impl.dart';
 import 'package:movie_application/features/movie_feature2/data/repository/movie_repository_impl.dart';
 import 'package:movie_application/features/movie_feature2/data/repository/objectbox_repository_impl.dart';
@@ -21,7 +20,6 @@ import 'package:movie_application/features/movie_feature2/domain/usecases/search
 import 'package:movie_application/features/movie_feature2/domain/usecases/toprated_usecase.dart';
 import 'package:movie_application/features/movie_feature2/domain/usecases/trailer_usecase.dart';
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider_state.dart';
-import 'package:movie_application/main.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'movie_provider.g.dart';

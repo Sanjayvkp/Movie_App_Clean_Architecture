@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_application/core/constants/homepage/home_page_constants.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
-import 'package:movie_application/features/movie_feature2/domain/entities/review_entity.dart';
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/elevatedbutton_widget.dart';
-import 'package:movie_application/features/movie_feature2/presentation/widgets/review_listview_widget.dart';
 
 class ShowModelWidget extends ConsumerWidget {
   final String title;
@@ -55,6 +53,6 @@ class ShowModelWidget extends ConsumerWidget {
         ),
       ),
     );
-    ;
+    
   }
 }

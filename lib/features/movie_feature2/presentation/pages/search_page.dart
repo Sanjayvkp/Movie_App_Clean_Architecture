@@ -4,14 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:movie_application/core/constants/api_constants/api_utils.dart';
 import 'package:movie_application/core/constants/homepage/home_page_constants.dart';
 import 'package:movie_application/core/theme/app_theme.dart';
-import 'package:movie_application/features/movie_feature2/domain/entities/movie_entity.dart';
-import 'package:movie_application/features/movie_feature2/presentation/pages/gridview_page.dart';
 import 'package:movie_application/features/movie_feature2/presentation/pages/overview_page.dart';
 import 'package:movie_application/features/movie_feature2/presentation/providers/movie_provider.dart';
-import 'package:movie_application/features/movie_feature2/presentation/widgets/heading_widget.dart';
-import 'package:movie_application/features/movie_feature2/presentation/widgets/listview_widget.dart';
 import 'package:movie_application/features/movie_feature2/presentation/widgets/search_textfield_widget.dart';
-import 'package:movie_application/features/movie_feature2/presentation/widgets/toprated_listview_widget.dart';
 
 class SearchPage extends ConsumerWidget {
   const SearchPage({super.key});
